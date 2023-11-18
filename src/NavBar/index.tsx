@@ -1,5 +1,7 @@
 import { Authenticated, Unauthenticated, AuthLoading } from "convex/react";
 import { useAuth0 } from "@auth0/auth0-react";
+import { MdLogout, MdLogin } from "react-icons/md";
+import logo from "../assets/SMP.png";
 const NavBar = () => {
   const { user, logout, loginWithRedirect } = useAuth0();
   const handelLogin = () => {
@@ -11,28 +13,38 @@ const NavBar = () => {
   console.log(user);
 
   return (
-    <div className="fixed top-0 left-0 w-screen flex justify-between items-center h-16 bg-green-800">
-      <div className="flex-none">Logo</div>
-      <div className="flex justify-between items-center min-w-80 w-80">
-        <Authenticated>
-          <span>Hello, {user?.name}</span>
-          <button className="btn" onClick={handelLogout}>
-            Logout
-          </button>
-        </Authenticated>
-        <Unauthenticated>
-          <span className=" whitespace-nowrap">
-            Log in now to discover our world
-          </span>
-          <button className="btn" onClick={handelLogin}>
-            Login
-          </button>
-        </Unauthenticated>
-        <AuthLoading>
-          <p>Loading..</p>
-        </AuthLoading>
-      </div>
-    </div>
+    <header className="fixed top-0 left-0 bg-gradient-to-b from-slate-900 to-slate-400 h-16 shadow">
+      <nav className="w-screen px-2 flex justify-between items-center h-full md:px-24">
+        <div className="w-28">
+          <img src={logo} alt="logo" />
+        </div>
+        <div className="flex justify-between items-center md:w-[30%]">
+          <Authenticated>
+            <div className="hidden md:flex items-center">
+              <img src={user?.picture} className="rounded-full h-10 mx-3" />
+              <span className="text-gray-300">
+                Hello,{" "}
+                {user?.name?.substring(0, user?.name.indexOf(".")) ||
+                  user?.name}
+              </span>
+            </div>
+
+            <button className="btn" onClick={handelLogout}>
+              <MdLogout />
+            </button>
+          </Authenticated>
+          <Unauthenticated>
+            <span className="text-gray-300">Discover our world</span>
+            <button className="btn ml-2" onClick={handelLogin}>
+              <MdLogin />
+            </button>
+          </Unauthenticated>
+          <AuthLoading>
+            <p>Loading..</p>
+          </AuthLoading>
+        </div>
+      </nav>
+    </header>
   );
 };
 

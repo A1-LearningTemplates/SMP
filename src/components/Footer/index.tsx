@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { MdLocationPin, MdMail, MdPhone } from "react-icons/md";
-import Info from "../components/Info";
+import Info from "./Info";
 import {
   FaFacebookF,
   FaYoutube,

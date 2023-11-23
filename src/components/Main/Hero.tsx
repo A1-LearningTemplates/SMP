@@ -1,4 +1,9 @@
+import { useAuth0 } from "@auth0/auth0-react";
 const Header = () => {
+  const { loginWithRedirect } = useAuth0();
+  const handelLogin = () => {
+    loginWithRedirect();
+  };
   return (
     <section className="flex h-screen items-center gap-4 snap-start pt-20 lg:pb-0">
       <div className="overflow-hidden hidden flex-1 h-2/3 w-full rounded md:block ">
@@ -28,7 +33,12 @@ const Header = () => {
           nesciunt aut iste aspernatur quis atque impedit natus.
         </p>
 
-        <button className="btn text-gray-200 md:self-start">Join Us</button>
+        <button
+          onClick={handelLogin}
+          className="btn text-gray-200 md:self-start"
+        >
+          Join Us
+        </button>
       </div>
     </section>
   );

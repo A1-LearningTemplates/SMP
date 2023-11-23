@@ -1,13 +1,20 @@
 import "./App.css";
 
-import NavBar from "./NavBar";
+import NavBar from "./components/NavBar";
 import { RouterProvider } from "react-router-dom";
-import router from "./Routes";
+import authRouter from "./routes/authRoutes";
+import unAuthRouter from "./routes/unAuthRoutes";
+import { Authenticated, Unauthenticated } from "convex/react";
 function App() {
   return (
-    <div className="px-1  lg:px-20 xl:px-24 bg-slate-200">
+    <div className="px-1 lg:px-20 xl:px-24 bg-slate-200">
       <NavBar />
-      <RouterProvider router={router} />
+      <Unauthenticated>
+        <RouterProvider router={unAuthRouter} />
+      </Unauthenticated>
+      <Authenticated>
+        <RouterProvider router={authRouter} />
+      </Authenticated>
     </div>
   );
 }

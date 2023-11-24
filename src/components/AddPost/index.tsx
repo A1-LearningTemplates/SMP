@@ -6,14 +6,15 @@ interface FormInitialValues {
 }
 import { useMutation } from "convex/react";
 import { api } from "../../../convex/_generated/api";
+import { useAppDispatch } from "../../features/hooks";
+import { addPost } from "../../features/posts/postsSlice";
 const AddPost = () => {
   const createPost = useMutation(api.posts.createPost);
-
+  const dispatch = useAppDispatch();
   const initialValues: FormInitialValues = {
     title: "",
     body: "",
   };
-
   const postSchema = Yup.object().shape({
     title: Yup.string()
       .min(2, "Too Short!")
@@ -28,8 +29,11 @@ const AddPost = () => {
     values: FormInitialValues,
     actions: FormikHelpers<FormInitialValues>
   ) => {
-    const data = await createPost(values);
-    console.log(data);
+    const _id = (await createPost(values)) as string;
+    // console.log(_id);
+
+    const newPost = { _id, media: "", ...values };
+    dispatch(addPost(newPost));
 
     actions.resetForm();
   };

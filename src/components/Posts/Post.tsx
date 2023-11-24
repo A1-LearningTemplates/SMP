@@ -1,7 +1,7 @@
 interface PostProps {
   body: string;
   media: string;
-  title: string;
+  title: string | undefined;
 }
 const Post = ({ media, body, title }: PostProps) => {
   return (

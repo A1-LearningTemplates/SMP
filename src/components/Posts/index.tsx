@@ -1,16 +1,25 @@
 import Post from "./Post";
 import Header from "./Header";
 
-import { useQuery } from "convex/react";
+import { useQuery, useAction } from "convex/react";
 import { api } from "../../../convex/_generated/api";
-// import { useEffect, useState } from "react";
-const Posts = () => {
-  const posts = useQuery(api.posts.getPosts);
-  /*   const [posts, setPosts] = useState([]);
-  useEffect(() => {
-    const getPosts = async () => {};
-  }, []); */
 
+import { useAppDispatch, useAppSelector } from "../../features/hooks";
+import { setPosts } from "../../features/posts/postsSlice";
+import { useEffect } from "react";
+const Posts = () => {
+  const param = new URLSearchParams(window.location.search).get("param");
+  const dispatch = useAppDispatch();
+  // const dispatch = useDispatch();
+  const posts = useAppSelector((state) => state.posts.posts);
+
+  const data = useQuery(api.posts.getPosts, posts.length ? "skip" : {});
+  console.log(data);
+
+  useEffect(() => {
+    if (data) dispatch(setPosts(data));
+  }, [data]);
+  if (!posts.length) return <p>Loading ..</p>;
   return (
     <div className="">
       {posts?.map((post) => {

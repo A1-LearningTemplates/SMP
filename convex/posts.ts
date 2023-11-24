@@ -4,6 +4,7 @@ export const getPosts = query({
   args: {},
   handler: async (ctx) => {
     return await ctx.db.query("posts").collect();
+
     // do something with `tasks`
   },
 });

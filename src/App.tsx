@@ -13,7 +13,10 @@ function App() {
         <RouterProvider router={unAuthRouter} />
       </Unauthenticated>
       <Authenticated>
-        <RouterProvider router={authRouter} />
+        <RouterProvider
+          router={authRouter}
+          fallbackElement={<h1 className=" text-2xl">loading..</h1>}
+        />
       </Authenticated>
     </div>
   );

@@ -1,15 +1,39 @@
 import { Authenticated, Unauthenticated, AuthLoading } from "convex/react";
-import { useAuth0 } from "@auth0/auth0-react";
+import { User, useAuth0 } from "@auth0/auth0-react";
 import { MdLogout, MdLogin } from "react-icons/md";
 import logo from "../../assets/SMP.png";
+import { useMutation } from "convex/react";
+import { api } from "../../../convex/_generated/api";
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../../features/hooks";
+import { setUserId } from "../../features/users/userSlice";
+
 const NavBar = () => {
+  const dispatch = useAppDispatch();
+  const userId = useAppSelector((state) => state.user.userId);
+  const authenticate = useMutation(api.users.authenticate);
   const { user, logout, loginWithRedirect } = useAuth0();
-  const handelLogin = () => {
-    loginWithRedirect();
+  const handelLogin = async () => {
+    await loginWithRedirect();
   };
   const handelLogout = () => {
     logout({ logoutParams: { returnTo: window.location.origin } });
   };
+  useEffect(() => {
+    const handleAuth = async (user: User | undefined) => {
+      const userId = await authenticate({
+        email: user?.email || "",
+        picture: user?.picture || "",
+        nickname: user?.nickname || "",
+      });
+      dispatch(setUserId(userId));
+    };
+    if (!userId) {
+      console.log("hhhh");
+
+      handleAuth(user);
+    }
+  }, [user]);
 
   return (
     <header className="fixed top-0 left-0 bg-gradient-to-b from-slate-900 to-slate-400 h-16 shadow z-10">
@@ -23,10 +47,7 @@ const NavBar = () => {
               <img src={user?.picture} className="rounded-full h-10 mx-3" />
               <p className="flex flex-wrap gap-2 text-gray-300">
                 <span>Hello,</span>
-                <span>
-                  {user?.name?.substring(0, user?.name.indexOf(".")) ||
-                    user?.name}
-                </span>
+                <span>{user?.nickname}</span>
               </p>
             </div>
 

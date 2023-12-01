@@ -1,20 +1,16 @@
 import Post from "./Post";
 import Header from "./Header";
 
-import { useQuery, useAction } from "convex/react";
+import { useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 
 import { useAppDispatch, useAppSelector } from "../../features/hooks";
 import { setPosts } from "../../features/posts/postsSlice";
 import { useEffect } from "react";
 const Posts = () => {
-  const param = new URLSearchParams(window.location.search).get("param");
   const dispatch = useAppDispatch();
-  // const dispatch = useDispatch();
   const posts = useAppSelector((state) => state.posts.posts);
-
   const data = useQuery(api.posts.getPosts, posts.length ? "skip" : {});
-  console.log(data);
 
   useEffect(() => {
     if (data) dispatch(setPosts(data));

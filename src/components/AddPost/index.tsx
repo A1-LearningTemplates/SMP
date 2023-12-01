@@ -1,19 +1,23 @@
 import { Formik, FormikHelpers, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-interface FormInitialValues {
+type FormInitialValues = {
   title: string;
   body: string;
-}
+  media: string;
+};
 import { useMutation } from "convex/react";
 import { api } from "../../../convex/_generated/api";
-import { useAppDispatch } from "../../features/hooks";
+import { useAppDispatch, useAppSelector } from "../../features/hooks";
 import { addPost } from "../../features/posts/postsSlice";
 const AddPost = () => {
+  const userId = useAppSelector((state) => state.user.userId);
+
   const createPost = useMutation(api.posts.createPost);
   const dispatch = useAppDispatch();
-  const initialValues: FormInitialValues = {
+  const initialValues = {
     title: "",
     body: "",
+    media: "",
   };
   const postSchema = Yup.object().shape({
     title: Yup.string()
@@ -29,10 +33,10 @@ const AddPost = () => {
     values: FormInitialValues,
     actions: FormikHelpers<FormInitialValues>
   ) => {
-    const _id = (await createPost(values)) as string;
-    // console.log(_id);
+    const postData = { ...values, userId };
+    const _id = await createPost(postData);
 
-    const newPost = { _id, media: "", ...values };
+    const newPost = { _id, ...postData };
     dispatch(addPost(newPost));
 
     actions.resetForm();

@@ -5,14 +5,21 @@ type FormInitialValues = {
   body: string;
   media: string;
 };
+import { uploadFiles } from "@xixixao/uploadstuff";
 import { useMutation } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { useAppDispatch, useAppSelector } from "../../features/hooks";
 import { addPost } from "../../features/posts/postsSlice";
+import { useAuth0 } from "@auth0/auth0-react";
+import { Id } from "../../../convex/_generated/dataModel";
+import { useState } from "react";
 const AddPost = () => {
+  const [media, setMedia] = useState("");
+  const { user } = useAuth0();
   const userId = useAppSelector((state) => state.user.userId);
 
   const createPost = useMutation(api.posts.createPost);
+  const generateUploadUrl = useMutation(api.files.generateUploadUrl);
   const dispatch = useAppDispatch();
   const initialValues = {
     title: "",
@@ -33,14 +40,31 @@ const AddPost = () => {
     values: FormInitialValues,
     actions: FormikHelpers<FormInitialValues>
   ) => {
-    const postData = { ...values, userId };
+    const date = new Date().getTime();
+    const postData = {
+      ...values,
+      media: "https://admired-ptarmigan-167.convex.cloud/api/storage/" + media,
+      userId,
+    };
     const _id = await createPost(postData);
-
-    const newPost = { _id, ...postData };
+    const newPost = {
+      _id,
+      ...postData,
+      media: "https://admired-ptarmigan-167.convex.cloud/api/storage/" + media,
+      _creationTime: date,
+      user: {
+        _id: userId,
+        is_active: true,
+        email: user?.email || "",
+        picture: user?.picture || "",
+        nickname: user?.nickname || "",
+      },
+    };
     dispatch(addPost(newPost));
-
     actions.resetForm();
+    setMedia("")
   };
+
   const renderError = (message: string) => (
     <span className="h-full bg-red-400 px-8 py-1 rounded">{message}</span>
   );
@@ -65,11 +89,31 @@ const AddPost = () => {
               className="input resize-none "
               as="textarea"
               name="body"
-              rows={10}
+              rows={6}
             />
             <ErrorMessage name="body" render={renderError} />
           </div>
-
+          <div>
+            <input
+              type="file"
+              onChange={async (event: React.ChangeEvent<HTMLInputElement>) => {
+                const files = event.target.files;
+                if (files?.length === 0) {
+                  return;
+                }
+                const postUrl = await generateUploadUrl({});
+                // Step 2: POST the file to the URL
+                const result = await fetch(postUrl, {
+                  method: "POST",
+                  headers: { "Content-Type": files![0].type },
+                  body: files![0] ? files![0] : null,
+                });
+                const { storageId } = await result.json();
+                // Step 3: Save the newly allocated storage id to the database
+                setMedia(storageId);
+              }}
+            />
+          </div>
           <button className="btn bg-slate-800" type="submit">
             Add
           </button>

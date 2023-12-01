@@ -9,7 +9,6 @@ export interface PostType {
   title: string;
   user: {
     _id: Id<"users">;
-    _creationTime: number;
     email: string;
     is_active: boolean;
     picture: string;

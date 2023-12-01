@@ -6,7 +6,7 @@ import { useMutation } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../features/hooks";
-import { setUserId } from "../../features/users/userSlice";
+import { removeUserId, setUserId } from "../../features/users/userSlice";
 
 const NavBar = () => {
   const dispatch = useAppDispatch();
@@ -16,8 +16,9 @@ const NavBar = () => {
   const handelLogin = async () => {
     await loginWithRedirect();
   };
-  const handelLogout = () => {
-    logout({ logoutParams: { returnTo: window.location.origin } });
+  const handelLogout = async () => {
+    await logout({ logoutParams: { returnTo: window.location.origin } });
+    dispatch(removeUserId());
   };
   useEffect(() => {
     const handleAuth = async (user: User | undefined) => {

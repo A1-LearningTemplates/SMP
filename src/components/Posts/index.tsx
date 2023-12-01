@@ -19,9 +19,14 @@ const Posts = () => {
   return (
     <div className="">
       {posts?.map((post) => {
+        const { user } = post;
         return (
           <section key={post._id} className="my-10 shadow">
-            <Header />
+            <Header
+              imgSrc={user?.picture}
+              userName={user?.nickname}
+              date={post._creationTime}
+            />
             <Post media={post.media} body={post.body} title={post.title} />
           </section>
         );

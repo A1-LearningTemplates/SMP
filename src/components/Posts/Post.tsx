@@ -1,6 +1,6 @@
 interface PostProps {
-  body: string;
-  media: string;
+  body: string| undefined;
+  media: string| undefined;
   title: string | undefined;
 }
 const Post = ({ media, body, title }: PostProps) => {

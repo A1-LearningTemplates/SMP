@@ -3,9 +3,14 @@ import { v } from "convex/values";
 export const getPosts = query({
   args: {},
   handler: async (ctx) => {
-    return await ctx.db.query("posts").collect();
+    const posts = await ctx.db.query("posts").collect();
 
-    // do something with `tasks`
+    return await Promise.all(
+      (posts ?? []).map( async(post) => {
+        const user = await ctx.db.get(post.userId);
+        return { ...post, user };
+      })
+    );
   },
 });
 export const createPost = mutation({

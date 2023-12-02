@@ -1,14 +1,13 @@
-import {mutation } from "./_generated/server";
+import { mutation } from "./_generated/server";
 import { v } from "convex/values";
 export const authenticate = mutation({
   args: {
     email: v.string(),
-  
     picture: v.string(),
     nickname: v.string(),
   },
   handler: async (ctx, args) => {
-    const {  email, picture, nickname } = args;
+    const { email, picture, nickname } = args;
     const user = await ctx.db
       .query("users")
       .withIndex("by_email", (q) => q.eq("email", email))
@@ -19,7 +18,7 @@ export const authenticate = mutation({
     } else {
       const userId = await ctx.db.insert("users", {
         email,
-        is_active:true,
+        is_active: true,
         picture,
         nickname,
       });
@@ -28,3 +27,11 @@ export const authenticate = mutation({
   },
 });
 
+export const updateVisibility = mutation({
+  args: { id: v.id("users") },
+  handler: async (ctx, args) => {
+    const { id } = args;
+    // console.log(await ctx.db.get(id));
+    await ctx.db.patch(id, { is_active: false });
+  },
+});

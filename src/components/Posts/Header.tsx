@@ -7,6 +7,7 @@ type HeaderProps = {
 };
 
 const Header = ({ imgSrc, userName, date }: HeaderProps) => {
+
   return (
     <div className="flex justify-between items-center bg-gradient-to-b from-slate-400 to-slate-200 rounded-t p-2 text-slate-800 ">
       <div className="relative flex justify-center items-center gap-2">

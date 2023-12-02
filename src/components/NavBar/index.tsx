@@ -12,29 +12,38 @@ const NavBar = () => {
   const dispatch = useAppDispatch();
   const userId = useAppSelector((state) => state.user.userId);
   const authenticate = useMutation(api.users.authenticate);
-  const { user, logout, loginWithRedirect } = useAuth0();
+  const updateVisibility = useMutation(api.users.updateVisibility);
+  const { user, logout, loginWithRedirect, isAuthenticated } = useAuth0();
   const handelLogin = async () => {
     await loginWithRedirect();
   };
   const handelLogout = async () => {
-    await logout({ logoutParams: { returnTo: window.location.origin } });
     dispatch(removeUserId());
+    await logout({
+      logoutParams: { returnTo: window.location.origin },
+    });
+    await updateVisibility({ id: userId });
   };
   useEffect(() => {
+    console.log("Asdas");
+    
     const handleAuth = async (user: User | undefined) => {
-      const userId = await authenticate({
-        email: user?.email || "",
-        picture: user?.picture || "",
-        nickname: user?.nickname || "",
-      });
-      dispatch(setUserId(userId));
-    };
-    if (!userId) {
-      console.log("hhhh");
+      try {
+        const userId = await authenticate({
+          email: user?.email || "",
+          picture: user?.picture || "",
+          nickname: user?.nickname || "",
+        });
 
+        dispatch(setUserId(userId));
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    if (isAuthenticated) {
       handleAuth(user);
     }
-  }, [user]);
+  }, [isAuthenticated]);
 
   return (
     <header className="fixed top-0 left-0 bg-gradient-to-b from-slate-900 to-slate-400 h-16 shadow z-10">

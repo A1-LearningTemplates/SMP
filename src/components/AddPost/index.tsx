@@ -5,13 +5,11 @@ type FormInitialValues = {
   body: string;
   media: string;
 };
-import { uploadFiles } from "@xixixao/uploadstuff";
 import { useMutation } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { useAppDispatch, useAppSelector } from "../../features/hooks";
 import { addPost } from "../../features/posts/postsSlice";
 import { useAuth0 } from "@auth0/auth0-react";
-import { Id } from "../../../convex/_generated/dataModel";
 import { useState } from "react";
 const AddPost = () => {
   const [media, setMedia] = useState("");

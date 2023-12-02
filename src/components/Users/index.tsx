@@ -2,9 +2,13 @@ import { useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 
 import { useAppDispatch, useAppSelector } from "../../features/hooks";
-import { useEffect } from "react";
+import { LegacyRef, useEffect } from "react";
 import { setUsers } from "../../features/users/userSlice";
-const Users = () => {
+
+type UsersProps = {
+  divRef: LegacyRef<HTMLDivElement> | undefined;
+};
+const Users = ({ divRef }: UsersProps) => {
   const dispatch = useAppDispatch();
   const users = useAppSelector((state) => state.user.users);
   const data = useQuery(api.users.gesUsers, users.length ? "skip" : {});
@@ -14,7 +18,7 @@ const Users = () => {
   }, [data]);
   if (!users.length) return <p>Loading ..</p>;
   return (
-    <div className="">
+    <div ref={divRef} className="flex">
       {users?.map((user) => {
         return (
           <div className="relative flex justify-center items-center gap-2">

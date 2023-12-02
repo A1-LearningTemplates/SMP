@@ -10,13 +10,7 @@ import { api } from "../../../convex/_generated/api";
 import { useAppDispatch, useAppSelector } from "../../features/hooks";
 import { addPost } from "../../features/posts/postsSlice";
 import { useAuth0 } from "@auth0/auth0-react";
-import {
-  LegacyRef,
-  MutableRefObject,
-  RefObject,
-  useRef,
-  useState,
-} from "react";
+import { useRef, useState } from "react";
 import Spinner from "./Spinner";
 const AddPost = () => {
   const { user } = useAuth0();

@@ -1,21 +1,27 @@
 import Post from "./Post";
 import Header from "./Header";
 
-import { useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 
 import { useAppDispatch, useAppSelector } from "../../features/hooks";
 import { setPosts } from "../../features/posts/postsSlice";
 import { useEffect } from "react";
+import { usePaginatedQuery } from "convex/react";
 const Posts = () => {
   const dispatch = useAppDispatch();
   const posts = useAppSelector((state) => state.posts.posts);
-  const data = useQuery(api.posts.getPosts, posts.length ? "skip" : {});
+  // const data = useQuery(api.posts.getPosts, posts.length ? "skip" : {});
+  const { results, status, loadMore } = usePaginatedQuery(
+    api.posts.getPosts,
+    {},
+    { initialNumItems: 5 }
+  );
 
   useEffect(() => {
-    if (data) dispatch(setPosts(data));
-  }, [data]);
-  if (!posts.length) return <p>Loading ..</p>;
+    if (results && status !== "LoadingMore") dispatch(setPosts(results));
+    return () => console.log("unmount");
+  }, [results]);
+  if (!posts.length || status === "LoadingMore") return <p>Loading Posts ..</p>;
   return (
     <div className="">
       {posts?.map((post) => {
@@ -31,6 +37,9 @@ const Posts = () => {
           </div>
         );
       })}
+      <button onClick={() => loadMore(5)} disabled={status !== "CanLoadMore"}>
+        Load More
+      </button>
     </div>
   );
 };

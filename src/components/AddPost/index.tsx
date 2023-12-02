@@ -57,8 +57,9 @@ const AddPost = () => {
       const date = new Date().getTime();
       const postData = {
         ...values,
-        media:
-          "https://admired-ptarmigan-167.convex.cloud/api/storage/" + media,
+        media: media
+          ? "https://admired-ptarmigan-167.convex.cloud/api/storage/" + media
+          : "",
         userId,
       };
       const _id = await createPost(postData);
@@ -77,7 +78,7 @@ const AddPost = () => {
         },
       };
       actions.resetForm();
-      inputFileRef.current.value = "";
+      inputFileRef.current ? (inputFileRef.current.value = "") : null;
       setFiles(null);
       dispatch(addPost(newPost));
       setIsloading(false);

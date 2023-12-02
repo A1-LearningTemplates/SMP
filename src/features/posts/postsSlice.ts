@@ -6,6 +6,7 @@ export interface PostType {
   body?: string | undefined;
   media?: string | undefined;
   userId: Id<"users">;
+  counter?: number | undefined;
   title: string;
   user: {
     _id: Id<"users">;
@@ -26,7 +27,7 @@ const postsSlice = createSlice({
   },
   reducers: {
     setPosts(state, action: PayloadAction<Array<PostType>>) {
-      state.posts = action.payload;
+      state.posts = [...action.payload];
     },
     addPost(state, action: PayloadAction<PostType>) {
       state.posts = [action.payload, ...state.posts];

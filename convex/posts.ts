@@ -1,16 +1,23 @@
 import { query, mutation } from "./_generated/server";
 import { v } from "convex/values";
-export const getPosts = query({
-  args: {},
-  handler: async (ctx) => {
-    const posts = await ctx.db.query("posts").order("desc").collect();
+import { paginationOptsValidator, PaginationResult } from "convex/server";
 
-    return await Promise.all(
-      (posts ?? []).map(async (post) => {
+export const getPosts = query({
+  args: { paginationOpts: paginationOptsValidator },
+  handler: async (ctx, args) => {
+    // const posts = await ctx.db.query("posts").order("desc").collect();
+
+    const posts = await ctx.db
+      .query("posts")
+      .order("desc")
+      .paginate(args.paginationOpts);
+    posts.page = await Promise.all(
+      posts.page.map(async (post) => {
         const user = await ctx.db.get(post.userId);
         return { ...post, user };
       })
     );
+    return posts;
   },
 });
 export const createPost = mutation({

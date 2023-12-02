@@ -1,19 +1,17 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import Users from "../Users";
 import Posts from "../Posts";
 import AddPost from "../AddPost";
 
 const Home = () => {
-  const usersRef = useRef<HTMLDivElement>(null);
+  const [fadeIn, setFadeIn] = useState(false);
   const toggleClassName = () => {
-    if (usersRef.current) {
-      usersRef.current.classList.toggle("hidden");
-    }
+    setFadeIn((prev) => !prev);
   };
   return (
     <div className="grid grid-cols-1 pt-20">
       <AddPost />
-      <Users divRef={usersRef} />
+      <Users fadeIn={fadeIn} toggleClassName={toggleClassName} />
       <Posts />
       <div className="fixed right-0 p-2">
         <button onClick={toggleClassName}>chat</button>

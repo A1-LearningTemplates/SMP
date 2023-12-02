@@ -1,4 +1,4 @@
-import { mutation } from "./_generated/server";
+import { mutation, query } from "./_generated/server";
 import { v } from "convex/values";
 export const authenticate = mutation({
   args: {
@@ -33,5 +33,18 @@ export const updateVisibility = mutation({
     const { id } = args;
     // console.log(await ctx.db.get(id));
     await ctx.db.patch(id, { is_active: false });
+  },
+});
+
+export const gesUsers = query({
+  args: {},
+  handler: async (ctx) => {
+    const users = await ctx.db
+      .query("users")
+      .filter((q) => q.eq(q.field("is_active"), true))
+      .order("asc")
+      .collect();
+
+    return users;
   },
 });

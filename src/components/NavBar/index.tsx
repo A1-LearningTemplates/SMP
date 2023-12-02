@@ -25,8 +25,6 @@ const NavBar = () => {
     await updateVisibility({ id: userId });
   };
   useEffect(() => {
-    console.log("Asdas");
-    
     const handleAuth = async (user: User | undefined) => {
       try {
         const userId = await authenticate({

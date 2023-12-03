@@ -67,7 +67,8 @@ const AddPost = () => {
         _id,
         ...postData,
         media:
-          "https://admired-ptarmigan-167.convex.cloud/api/storage/" + media,
+          /*   "https://admired-ptarmigan-167.convex.cloud/api/storage/"  */ "https://vibrant-partridge-466.convex.cloud/api/storage/" +
+          media,
         _creationTime: date,
         user: {
           _id: userId,

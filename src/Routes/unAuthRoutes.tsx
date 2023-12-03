@@ -8,5 +8,5 @@ const initRouter: RouteObject[] = [
     element: <Main />,
   },
 ];
-const unAuthRouter = createBrowserRouter(initRouter, { basename: "/" });
+const unAuthRouter = createBrowserRouter(initRouter);
 export { unAuthRouter };

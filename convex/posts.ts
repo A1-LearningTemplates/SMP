@@ -5,8 +5,6 @@ import { paginationOptsValidator } from "convex/server";
 export const getPosts = query({
   args: { paginationOpts: paginationOptsValidator },
   handler: async (ctx, args) => {
-    // const posts = await ctx.db.query("posts").order("desc").collect();
-
     const posts = await ctx.db
       .query("posts")
       .order("desc")
@@ -14,9 +12,11 @@ export const getPosts = query({
     posts.page = await Promise.all(
       posts.page.map(async (post) => {
         const user = await ctx.db.get(post.userId);
-        return { ...post, user };
+
+        return { ...post, user: user || undefined };
       })
     );
+
     return posts;
   },
 });

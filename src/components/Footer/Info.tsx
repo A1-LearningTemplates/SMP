@@ -1,5 +1,3 @@
-import { ReactNode } from "react";
-
 interface InfoProps {
   icon: JSX.Element;
   content: string;

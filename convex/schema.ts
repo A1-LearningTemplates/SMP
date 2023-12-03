@@ -12,15 +12,15 @@ export default defineSchema({
     media: v.optional(v.string()),
     title: v.string(),
     userId: v.id("users"),
-    // user: v.optional(
-    //   v.object({
-    //     _id: v.id("users"),
-    //     email: v.string(),
-    //     is_active: v.boolean(),
-    //     picture: v.string(),
-    //     nickname: v.string(),
-    //     _creationTime: v.number(),
-    //   })
-    // ),
+    user: v.optional(
+      v.object({
+        _id: v.id("users"),
+        email: v.string(),
+        is_active: v.boolean(),
+        picture: v.string(),
+        nickname: v.string(),
+        _creationTime: v.number(),
+      })
+    ),
   }),
 });

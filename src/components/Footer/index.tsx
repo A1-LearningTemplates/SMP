@@ -1,4 +1,3 @@
-import { ReactNode } from "react";
 import { MdLocationPin, MdMail, MdPhone } from "react-icons/md";
 import Info from "./Info";
 import {

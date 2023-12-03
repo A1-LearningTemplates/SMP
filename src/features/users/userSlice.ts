@@ -28,23 +28,8 @@ const usersSlice = createSlice({
       state.userId = "" as Id<"users">;
       localStorage.removeItem("userId");
     },
-    setUsers(state, action: PayloadAction<Array<UserObject>>) {
-      state.users = action.payload;
-    },
-    addUser(state, action: PayloadAction<UserObject>) {
-      state.users = [action.payload, ...state.users];
-    },
-    RemoveUser(state, action: PayloadAction<string>) {
-      // state.users = [action.payload, ...state.users];
-    },
   },
 });
 
-export const {
-  setUserId,
-  removeUserId,
-  setUsers,
-  addUser,
-  RemoveUser,
-} = usersSlice.actions;
+export const { setUserId, removeUserId } = usersSlice.actions;
 export default usersSlice.reducer;

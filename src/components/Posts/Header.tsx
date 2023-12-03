@@ -1,4 +1,5 @@
 import moment from "moment";
+import { memo } from "react";
 
 type HeaderProps = {
   imgSrc: string | undefined;
@@ -6,7 +7,7 @@ type HeaderProps = {
   date: number;
 };
 
-const Header = ({ imgSrc, userName, date }: HeaderProps) => {
+const Header = memo(({ imgSrc, userName, date }: HeaderProps) => {
   return (
     <div className="flex justify-between items-center bg-gradient-to-b from-slate-400 to-slate-200 rounded-t p-2 text-slate-800 ">
       <div className="relative flex justify-center items-center gap-2">
@@ -28,6 +29,6 @@ const Header = ({ imgSrc, userName, date }: HeaderProps) => {
       </div>
     </div>
   );
-};
+});
 
 export default Header;

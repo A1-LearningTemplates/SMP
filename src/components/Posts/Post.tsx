@@ -1,9 +1,11 @@
+import { memo } from "react";
+
 interface PostProps {
-  body: string| undefined;
-  media: string| undefined;
+  body: string | undefined;
+  media: string | undefined;
   title: string | undefined;
 }
-const Post = ({ media, body, title }: PostProps) => {
+const Post = memo(({ media, body, title }: PostProps) => {
   return (
     <div className="flex flex-col gap-4 p-4 border-slate-400">
       <div className="border-b-2 border-slate-500 py-4 ">
@@ -15,6 +17,6 @@ const Post = ({ media, body, title }: PostProps) => {
       </div>
     </div>
   );
-};
+});
 
 export default Post;

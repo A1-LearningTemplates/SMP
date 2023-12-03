@@ -39,10 +39,7 @@ export const updateVisibility = mutation({
 export const gesUsers = query({
   args: {},
   handler: async (ctx) => {
-    const users = await ctx.db
-      .query("users")
-      .order("asc")
-      .collect();
+    const users = await ctx.db.query("users").order("asc").collect();
 
     return users;
   },

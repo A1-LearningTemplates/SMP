@@ -2,8 +2,8 @@ import "./App.css";
 
 import NavBar from "./components/NavBar";
 import { RouterProvider } from "react-router-dom";
-import authRouter from "./routes/AuthRoutes";
-import unAuthRouter from "./routes/UnAuthRoutes";
+import { authRouter } from "./routes/authRoutes";
+import { unAuthRouter } from "./routes/unAuthRoutes";
 import { Authenticated, Unauthenticated } from "convex/react";
 
 function App() {

@@ -2,7 +2,7 @@ import { Navigate, RouteObject, createBrowserRouter } from "react-router-dom";
 
 import Home from "../components/Home";
 import Messenger from "../components/Messenger";
-const router: RouteObject[] = [
+const initRouter: RouteObject[] = [
   {
     index: true,
     path: "/",
@@ -17,4 +17,5 @@ const router: RouteObject[] = [
     element: <Messenger />,
   },
 ];
-export default createBrowserRouter(router, { basename: "/" });
+const authRouter = createBrowserRouter(initRouter, { basename: "/" });
+export { authRouter };

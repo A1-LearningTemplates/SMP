@@ -2,10 +2,11 @@ import { RouteObject, createBrowserRouter } from "react-router-dom";
 
 import Main from "../components/Main/index";
 
-const router: RouteObject[] = [
+const initRouter: RouteObject[] = [
   {
     path: "/",
     element: <Main />,
   },
 ];
-export default createBrowserRouter(router, { basename: "/" });
+const unAuthRouter = createBrowserRouter(initRouter, { basename: "/" });
+export { unAuthRouter };

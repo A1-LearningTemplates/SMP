@@ -17,5 +17,5 @@ const initRouter: RouteObject[] = [
     element: <Messenger />,
   },
 ];
-const authRouter = createBrowserRouter(initRouter);
+const authRouter = createBrowserRouter(initRouter, { basename: "/home" });
 export { authRouter };

@@ -12,6 +12,7 @@ export default defineSchema({
     media: v.optional(v.string()),
     title: v.string(),
     userId: v.id("users"),
-    counter: v.optional(v.number()),
-  }).index("by_counter", ["counter"]),
+    upVote: v.array(v.id("users")),
+    downVote: v.array(v.id("users")),
+  }),
 });

@@ -14,7 +14,7 @@ const NavBar = () => {
   const authenticate = useMutation(api.users.authenticate);
   const updateVisibility = useMutation(api.users.updateVisibility);
   const { user, logout, loginWithRedirect, isAuthenticated } = useAuth0();
-  const handelLogin = async () => {
+  const handelLogin = async () => { 
     await loginWithRedirect();
   };
   const handelLogout = async () => {

@@ -1,18 +1,24 @@
 import Post from "./Post";
 import Header from "./Header";
-import { usePaginatedQueryPosts } from "./hooks";
+import { usePaginatedQuery } from "convex/react";
+import { api } from "../../../convex/_generated/api";
 const Posts = () => {
-  const { posts, status, loadMore } = usePaginatedQueryPosts();
-  if (!posts.length) return <p>Loading Posts ..</p>;
+  const { results, status, loadMore } = usePaginatedQuery(
+    api.posts.getPosts,
+    {},
+    { initialNumItems: 5 }
+  );
+  if (!results.length) return <p>Loading Posts ..</p>;
   return (
     <div className="">
-      {posts?.map((post) => {
-        const { user } = post;
+      {results?.map((post) => {
+        const user = post?.user || null;
         return (
           <div key={post._id} className="my-10 shadow">
             <Header
               imgSrc={user?.picture}
               userName={user?.nickname}
+              is_active={user?.is_active}
               date={post._creationTime}
             />
             <Post media={post.media} body={post.body} title={post.title} />

@@ -33,8 +33,6 @@ export const createPost = mutation({
       body: args.body,
       media: args.media,
       userId: args.userId,
-      upVote: [],
-      downVote: [],
     });
     return postId;
   },

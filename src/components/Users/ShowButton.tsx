@@ -6,7 +6,7 @@ const ShowButton = ({ fadeIn, toggleClassName }: UsersProps) => {
   return (
     <>
       {!fadeIn && (
-        <div className="fixed w-12 h-12 z-10 text-center top-20 right-3">
+        <div className="fixed w-12 h-12 z-10 text-center top-20 right-3 text-slate-100 font-bold">
           <button
             className=" absolute  bg-green-400 w-full h-full rounded-full animate-ping z-10"
             onClick={toggleClassName}

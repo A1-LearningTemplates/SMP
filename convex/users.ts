@@ -41,7 +41,6 @@ export const gesUsers = query({
   handler: async (ctx) => {
     const users = await ctx.db
       .query("users")
-      .filter((q) => q.eq(q.field("is_active"), true))
       .order("asc")
       .collect();
 

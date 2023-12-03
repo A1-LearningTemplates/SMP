@@ -2,9 +2,9 @@ import "./App.css";
 
 import NavBar from "./components/NavBar";
 import { RouterProvider } from "react-router-dom";
-// import authRouter from "./routes/authRoutes";
-import unAuthRouter from "./routes/unAuthRoutes";
-import { /* Authenticated, */ Unauthenticated } from "convex/react";
+import authRouter from "./routes/AuthRoutes";
+import unAuthRouter from "./routes/UnAuthRoutes";
+import { Authenticated, Unauthenticated } from "convex/react";
 
 function App() {
   return (
@@ -13,12 +13,12 @@ function App() {
       <Unauthenticated>
         <RouterProvider router={unAuthRouter} />
       </Unauthenticated>
-      {/* <Authenticated>
-          <RouterProvider
-            router={authRouter}
-            fallbackElement={<h1 className=" text-2xl">loading..</h1>}
-          />
-      </Authenticated> */}
+      <Authenticated>
+        <RouterProvider
+          router={authRouter}
+          fallbackElement={<h1 className=" text-2xl">loading..</h1>}
+        />
+      </Authenticated>
     </div>
   );
 }

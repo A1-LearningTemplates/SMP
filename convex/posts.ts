@@ -12,7 +12,8 @@ export const getPosts = query({
     posts.page = await Promise.all(
       posts.page.map(async (post) => {
         const user = await ctx.db.get(post.userId);
-
+        const mediaUrl = post?.media && (await ctx.storage.getUrl(post?.media));
+        post.media = mediaUrl || undefined;
         return { ...post, user: user || undefined };
       })
     );

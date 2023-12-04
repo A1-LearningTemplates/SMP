@@ -57,18 +57,14 @@ const AddPost = () => {
       const date = new Date().getTime();
       const postData = {
         ...values,
-        media: media
-          ? "https://admired-ptarmigan-167.convex.cloud/api/storage/" + media
-          : "",
+        media,
         userId,
       };
       const _id = await createPost(postData);
       const newPost = {
         _id,
         ...postData,
-        media:
-          /*   "https://admired-ptarmigan-167.convex.cloud/api/storage/"  */ "https://vibrant-partridge-466.convex.cloud/api/storage/" +
-          media,
+        media,
         _creationTime: date,
         user: {
           _id: userId,

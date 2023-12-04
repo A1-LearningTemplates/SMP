@@ -8,6 +8,8 @@ const Posts = () => {
     {},
     { initialNumItems: 5 }
   );
+  console.log(results);
+
   if (!results.length) return <p>Loading Posts ..</p>;
   return (
     <div className="">

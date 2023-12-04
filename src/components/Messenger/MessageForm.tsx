@@ -27,8 +27,7 @@ const MessageForm = () => {
   );
 
   return (
-    <div className="absolute bottom-0 w-full">
-      
+    <div className="w-full py-3">
       <Formik initialValues={initialValues} onSubmit={onMessageSend}>
         <Form className="flex flex-col gap-3">
           <div>

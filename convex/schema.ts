@@ -23,4 +23,31 @@ export default defineSchema({
       })
     ),
   }),
+
+  messages: defineTable({
+    content: v.optional(v.string()),
+    media: v.optional(v.string()),
+    receiverId: v.string(),
+    senderId: v.id("users"),
+    receiver: v.optional(
+      v.object({
+        _id: v.id("users"),
+        email: v.string(),
+        is_active: v.boolean(),
+        picture: v.string(),
+        nickname: v.string(),
+        _creationTime: v.number(),
+      })
+    ),
+    sender: v.optional(
+      v.object({
+        _id: v.id("users"),
+        email: v.string(),
+        is_active: v.boolean(),
+        picture: v.string(),
+        nickname: v.string(),
+        _creationTime: v.number(),
+      })
+    ),
+  }),
 });

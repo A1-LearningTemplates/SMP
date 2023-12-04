@@ -1,7 +1,7 @@
 import ActiveUser from "./ActiveUser";
 
 type UserAvatarProps = {
-  openMessenger: () => void;
+  onUserClick: (userId: string ) => void;
   user: {
     _id: string;
     picture: string;
@@ -9,12 +9,12 @@ type UserAvatarProps = {
     nickname: string;
   };
 };
-const UserAvatar = ({ user, openMessenger }: UserAvatarProps) => {
+const UserAvatar = ({ user, onUserClick }: UserAvatarProps) => {
   return (
     <div
       key={user._id}
       className="relative flex justify-center items-center cursor-pointer gap-2 p-2"
-      onClick={openMessenger}
+      onClick={() => onUserClick(user._id)}
     >
       <div className="relative flex justify-center items-center gap-2">
         <img

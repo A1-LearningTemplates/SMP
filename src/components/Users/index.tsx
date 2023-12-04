@@ -14,8 +14,7 @@ const Users = () => {
   };
   const navigate = useNavigate();
   const users = useQuery(api.users.gesUsers);
-  const openMessenger = () => {
-    console.log("Sss");
+  const onUserClick = () => {
     navigate("/messenger");
   };
   if (!users) return <p>Loading Users ..</p>;
@@ -33,7 +32,7 @@ const Users = () => {
             online users
           </h3>
           {users?.map((user) => {
-            return <UserAvatar openMessenger={openMessenger} user={user} />;
+            return <UserAvatar onUserClick={onUserClick} user={user} />;
           })}
         </div>
       </div>

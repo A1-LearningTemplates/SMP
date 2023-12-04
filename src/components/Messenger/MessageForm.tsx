@@ -28,11 +28,12 @@ const MessageForm = () => {
 
   return (
     <div className="absolute bottom-0 w-full">
+      
       <Formik initialValues={initialValues} onSubmit={onMessageSend}>
         <Form className="flex flex-col gap-3">
           <div>
             <Field
-              className="input"
+              className="input "
               name="message"
               type="text"
               placeholder="Message..."

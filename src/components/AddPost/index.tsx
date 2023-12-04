@@ -7,20 +7,19 @@ type FormInitialValues = {
 };
 import { useMutation } from "convex/react";
 import { api } from "../../../convex/_generated/api";
-import { useAppDispatch, useAppSelector } from "../../features/hooks";
-import { addPost } from "../../features/posts/postsSlice";
-import { useAuth0 } from "@auth0/auth0-react";
+import { useAppSelector } from "../../features/hooks";
+// import { useAuth0 } from "@auth0/auth0-react";
 import { useRef, useState } from "react";
 import Spinner from "./Spinner";
 const AddPost = () => {
-  const { user } = useAuth0();
+  // const { user } = useAuth0();
   const userId = useAppSelector((state) => state.user.userId);
   const [isloading, setIsloading] = useState(false);
   const inputFileRef = useRef<HTMLInputElement>(null);
   const [files, setFiles] = useState<FileList | null>(null);
   const createPost = useMutation(api.posts.createPost);
   const generateUploadUrl = useMutation(api.files.generateUploadUrl);
-  const dispatch = useAppDispatch();
+
   const initialValues = {
     title: "",
     body: "",
@@ -54,30 +53,15 @@ const AddPost = () => {
 
         media = storageId;
       }
-      const date = new Date().getTime();
       const postData = {
         ...values,
         media,
         userId,
       };
-      const _id = await createPost(postData);
-      const newPost = {
-        _id,
-        ...postData,
-        media,
-        _creationTime: date,
-        user: {
-          _id: userId,
-          is_active: true,
-          email: user?.email || "",
-          picture: user?.picture || "",
-          nickname: user?.nickname || "",
-        },
-      };
+     await createPost(postData);
       actions.resetForm();
       inputFileRef.current ? (inputFileRef.current.value = "") : null;
       setFiles(null);
-      dispatch(addPost(newPost));
       setIsloading(false);
     } catch (error) {
       console.log(error);

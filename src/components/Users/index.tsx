@@ -4,8 +4,8 @@ import { api } from "../../../convex/_generated/api";
 import { useState } from "react";
 
 import ShowButton from "./ShowButton";
-import ActiveUser from "./ActiveUser";
 import { useNavigate } from "react-router-dom";
+import UserAvatar from "./UserAvatar";
 
 const Users = () => {
   const [fadeIn, setFadeIn] = useState(false);
@@ -33,24 +33,7 @@ const Users = () => {
             online users
           </h3>
           {users?.map((user) => {
-            return (
-              <div
-                key={user._id}
-                className="relative flex justify-center items-center cursor-pointer gap-2 p-2"
-                onClick={openMessenger}
-              >
-                <div className="relative flex justify-center items-center gap-2">
-                  <img
-                    className="w-10 h-10 rounded-full"
-                    src={user.picture}
-                    alt="User Image"
-                  />
-                  <ActiveUser is_active={user.is_active} />
-                </div>
-
-                <p className="font-bold">{user.nickname}</p>
-              </div>
-            );
+            return <UserAvatar openMessenger={openMessenger} user={user} />;
           })}
         </div>
       </div>

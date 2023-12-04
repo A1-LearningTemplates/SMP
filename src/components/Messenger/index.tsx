@@ -5,6 +5,8 @@ import UserAvatar, { UserInfo } from "../Users/UserAvatar";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Messages from "./Messages";
+import { Id } from "../../../convex/_generated/dataModel";
+
 const Messenger = () => {
   const [show, setShow] = useState(false);
   const users = useQuery(api.users.gesUsers);
@@ -49,7 +51,7 @@ const Messenger = () => {
             </div>
 
             <Messages />
-            <MessageForm />
+            <MessageForm receiverId={activeUser?._id as Id<"users">} />
           </div>
         </div>
       </div>

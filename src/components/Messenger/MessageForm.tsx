@@ -1,22 +1,40 @@
 import { Formik, FormikHelpers, Form, Field, ErrorMessage } from "formik";
 type FormInitialValues = {
-  message: string;
+  content: string;
   // media: string;
 };
-const MessageForm = () => {
+import { useMutation } from "convex/react";
+import { api } from "../../../convex/_generated/api";
+import { useAppSelector } from "../../features/hooks";
+import { Id } from "../../../convex/_generated/dataModel";
+
+const MessageForm = ({ receiverId }: { receiverId: Id<"users"> }) => {
+  const senderId = useAppSelector((state) => state.user.userId);
+  const createMessage = useMutation(api.messages.createMessage);
   const initialValues = {
-    message: "",
+    content: "",
     // media: "",
   };
 
-  const onMessageSend = (
+  const onMessageSend = async (
     values: FormInitialValues,
     actions: FormikHelpers<FormInitialValues>
   ) => {
     console.log(values);
 
     try {
-      actions.resetForm();
+      const message = {
+        content: values.content,
+        media: "",
+        receiverId: receiverId,
+        senderId: senderId,
+      };
+      const id = await createMessage(message);
+      if (id) {
+        actions.resetForm();
+      } else {
+        throw new Error("Something went wrong");
+      }
     } catch (error) {
       console.log(error);
     }
@@ -33,11 +51,11 @@ const MessageForm = () => {
           <div>
             <Field
               className="input "
-              name="message"
+              name="content"
               type="text"
               placeholder="Message..."
             />
-            <ErrorMessage name="message" render={renderError} />
+            <ErrorMessage name="content" render={renderError} />
           </div>
         </Form>
       </Formik>

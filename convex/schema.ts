@@ -27,7 +27,7 @@ export default defineSchema({
   messages: defineTable({
     content: v.optional(v.string()),
     media: v.optional(v.string()),
-    receiverId: v.string(),
+    receiverId: v.id("users"),
     senderId: v.id("users"),
     receiver: v.optional(
       v.object({

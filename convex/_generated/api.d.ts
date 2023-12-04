@@ -15,6 +15,7 @@ import type {
   FunctionReference,
 } from "convex/server";
 import type * as files from "../files";
+import type * as messages from "../messages";
 import type * as posts from "../posts";
 import type * as users from "../users";
 
@@ -28,6 +29,7 @@ import type * as users from "../users";
  */
 declare const fullApi: ApiFromModules<{
   files: typeof files;
+  messages: typeof messages;
   posts: typeof posts;
   users: typeof users;
 }>;

@@ -3,22 +3,29 @@ import { v } from "convex/values";
 import { paginationOptsValidator } from "convex/server";
 
 export const getMessages = query({
-  args: { paginationOpts: paginationOptsValidator },
+  args: { paginationOpts: paginationOptsValidator, userId: v.id("users") },
   handler: async (ctx, args) => {
-    const posts = await ctx.db
-      .query("posts")
+    const messages = await ctx.db
+      .query("messages")
+      .filter((q) =>
+        q.or(
+          q.eq(q.field("receiverId"), args.userId),
+          q.eq(q.field("senderId"), args.userId)
+        )
+      )
       .order("desc")
       .paginate(args.paginationOpts);
-    posts.page = await Promise.all(
-      posts.page.map(async (post) => {
-        const user = await ctx.db.get(post.userId);
-        const mediaUrl = post?.media && (await ctx.storage.getUrl(post?.media));
-        post.media = mediaUrl || undefined;
-        return { ...post, user: user || undefined };
+    messages.page = await Promise.all(
+      messages.page.map(async (message) => {
+        // const user = await ctx.db.get(message.senderId);
+        const receiver = await ctx.db.get(message.receiverId);
+        // const mediaUrl = message?.media && (await ctx.storage.getUrl(message?.media));
+        // message.media = mediaUrl || undefined;
+        return { ...message, receiver: receiver || undefined };
       })
     );
 
-    return posts;
+    return messages;
   },
 });
 export const createMessage = mutation({

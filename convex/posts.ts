@@ -25,7 +25,7 @@ export const createPost = mutation({
   args: {
     title: v.string(),
     body: v.string(),
-    media: v.string(),
+    media: v.optional(v.string()),
     userId: v.id("users"),
   },
   handler: async (ctx, args) => {

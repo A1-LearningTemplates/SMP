@@ -9,4 +9,4 @@ const initRouter: RouteObject[] = [
   },
 ];
 const unAuthRouter = createBrowserRouter(initRouter);
-export { unAuthRouter };
+export default unAuthRouter;

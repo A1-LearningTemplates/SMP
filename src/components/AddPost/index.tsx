@@ -9,12 +9,13 @@ import { useMutation } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { useAppSelector } from "../../features/hooks";
 // import { useAuth0 } from "@auth0/auth0-react";
-import { useRef, useState } from "react";
+import { useRef, useState, useTransition } from "react";
 import Spinner from "./Spinner";
 const AddPost = () => {
   // const { user } = useAuth0();
+  const [isPendeing, startTransition] = useTransition();
   const userId = useAppSelector((state) => state.user.userId);
-  const [isloading, setIsloading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const inputFileRef = useRef<HTMLInputElement>(null);
   const [files, setFiles] = useState<FileList | null>(null);
   const createPost = useMutation(api.posts.createPost);
@@ -40,7 +41,7 @@ const AddPost = () => {
     actions: FormikHelpers<FormInitialValues>
   ) => {
     try {
-      setIsloading(true);
+      setIsLoading(true);
       let media;
       if (files) {
         const postUrl = await generateUploadUrl({});
@@ -58,14 +59,14 @@ const AddPost = () => {
         media,
         userId,
       };
-     await createPost(postData);
+      await createPost(postData);
       actions.resetForm();
       inputFileRef.current ? (inputFileRef.current.value = "") : null;
       setFiles(null);
-      setIsloading(false);
     } catch (error) {
       console.log(error);
-      setIsloading(false);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -75,7 +76,7 @@ const AddPost = () => {
 
   return (
     <div className=" relative w-full border-2 p-2 border-slate-400 rounded shadow">
-      {isloading && <Spinner />}
+      {isLoading && <Spinner />}
       <h2 className="text-2xl font-bold text-center pb-2 text-slate-600">
         Create Post
       </h2>

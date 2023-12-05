@@ -9,7 +9,7 @@ type HeaderProps = {
   is_active: boolean | undefined;
 };
 
-const Header = memo(({ imgSrc, userName, date, is_active }: HeaderProps) => {
+const Header = ({ imgSrc, userName, date, is_active }: HeaderProps) => {
   console.log(is_active);
 
   return (
@@ -33,6 +33,6 @@ const Header = memo(({ imgSrc, userName, date, is_active }: HeaderProps) => {
       </div>
     </div>
   );
-});
+};
 
 export default Header;

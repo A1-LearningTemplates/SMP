@@ -8,12 +8,9 @@ type FormInitialValues = {
 import { useMutation } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { useAppSelector } from "../../features/hooks";
-// import { useAuth0 } from "@auth0/auth0-react";
-import { useRef, useState, useTransition } from "react";
+import { useRef, useState } from "react";
 import Spinner from "./Spinner";
 const AddPost = () => {
-  // const { user } = useAuth0();
-  const [isPendeing, startTransition] = useTransition();
   const userId = useAppSelector((state) => state.user.userId);
   const [isLoading, setIsLoading] = useState(false);
   const inputFileRef = useRef<HTMLInputElement>(null);
@@ -59,7 +56,7 @@ const AddPost = () => {
         media,
         userId,
       };
-      await createPost(postData);
+      createPost(postData);
       actions.resetForm();
       inputFileRef.current ? (inputFileRef.current.value = "") : null;
       setFiles(null);

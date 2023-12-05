@@ -2,7 +2,8 @@ import Post from "./Post";
 import Header from "./Header";
 import { usePaginatedQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
-const Posts = () => {
+import { memo } from "react";
+const Posts = memo(() => {
   const { results, status, loadMore } = usePaginatedQuery(
     api.posts.getPosts,
     {},
@@ -32,6 +33,6 @@ const Posts = () => {
       </button>
     </div>
   );
-};
+});
 
 export default Posts;

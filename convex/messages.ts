@@ -3,14 +3,24 @@ import { v } from "convex/values";
 import { paginationOptsValidator } from "convex/server";
 
 export const getMessages = query({
-  args: { paginationOpts: paginationOptsValidator, userId: v.id("users") },
+  args: {
+    paginationOpts: paginationOptsValidator,
+    receiverId: v.id("users"),
+    senderId: v.id("users"),
+  },
   handler: async (ctx, args) => {
     const messages = await ctx.db
       .query("messages")
       .filter((q) =>
         q.or(
-          q.eq(q.field("receiverId"), args.userId),
-          q.eq(q.field("senderId"), args.userId)
+          q.and(
+            q.eq(q.field("receiverId"), args.receiverId),
+            q.eq(q.field("senderId"), args.senderId)
+          ),
+          q.and(
+            q.eq(q.field("receiverId"), args.senderId),
+            q.eq(q.field("senderId"), args.receiverId)
+          )
         )
       )
       .order("desc")

@@ -1,10 +1,8 @@
-import { memo } from "react";
-
-interface PostProps {
+type PostProps = {
   body: string | undefined;
   media: string | undefined;
   title: string | undefined;
-}
+};
 const Post = ({ media, body, title }: PostProps) => {
   return (
     <div className="flex flex-col gap-4 p-4 border-slate-400">

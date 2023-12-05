@@ -2,7 +2,6 @@ import MessageForm from "./MessageForm";
 import { useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import UserAvatar, { UserInfo } from "../Users/UserAvatar";
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Messages from "./Messages";
 import { Id } from "../../../convex/_generated/dataModel";
@@ -14,7 +13,6 @@ const Messenger = () => {
   const onUserClick = (user: UserInfo) => {
     setActiveUser(user);
     togglePage();
-    // userId && navigate(userId);
   };
   const togglePage = () => {
     setShow(!show);

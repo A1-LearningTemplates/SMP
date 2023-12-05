@@ -32,7 +32,13 @@ const Users = () => {
             online users
           </h3>
           {users?.map((user) => {
-            return <UserAvatar onUserClick={onUserClick} user={user} />;
+            return (
+              <UserAvatar
+                key={user._id}
+                onUserClick={onUserClick}
+                user={user}
+              />
+            );
           })}
         </div>
       </div>

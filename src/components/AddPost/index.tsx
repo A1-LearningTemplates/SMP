@@ -72,7 +72,7 @@ const AddPost = () => {
   );
 
   return (
-    <div className=" relative w-full border-2 p-2 border-slate-400 rounded shadow">
+    <div className="relative w-full border-2 p-2 border-slate-400 rounded shadow">
       {isLoading && <Spinner />}
       <h2 className="text-2xl font-bold text-center pb-2 text-slate-600">
         Create Post

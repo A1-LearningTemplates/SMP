@@ -1,6 +1,4 @@
 import "./App.css";
-
-import NavBar from "./components/NavBar";
 import { RouterProvider } from "react-router-dom";
 import authRouter from "./routes/authRoutes";
 import unAuthRouter from "./routes/unAuthRoutes";

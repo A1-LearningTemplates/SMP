@@ -4,7 +4,7 @@ import { MdLogout, MdLogin } from "react-icons/md";
 import logo from "../../assets/SMP.png";
 import { useMutation } from "convex/react";
 import { api } from "../../../convex/_generated/api";
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, useMemo } from "react";
 
 import { UserContext } from "../../context";
 import { Id } from "../../../convex/_generated/dataModel";
@@ -14,6 +14,7 @@ const NavBar = () => {
   const authenticate = useMutation(api.users.authenticate);
   const updateVisibility = useMutation(api.users.updateVisibility);
   const { user, logout, loginWithRedirect, isAuthenticated } = useAuth0();
+  const memUserId = useMemo(() => userId, [user]);
   const handelLogin = async () => {
     await loginWithRedirect();
   };
@@ -21,7 +22,7 @@ const NavBar = () => {
     await logout({
       logoutParams: { returnTo: window.location.origin },
     });
-    await updateVisibility({ id: userId as Id<"users"> });
+    await updateVisibility({ id: memUserId as Id<"users"> });
     removeUserId();
   };
   useEffect(() => {

@@ -9,15 +9,15 @@ const Messages = ({
   receiverId: Id<"users">;
   senderId: Id<"users">;
 }) => {
-  const { results, status, loadMore } = usePaginatedQuery(
+  const { results /* status, loadMore  */ } = usePaginatedQuery(
     api.messages.getMessages,
     { receiverId, senderId },
     { initialNumItems: 20 }
   );
   return (
     <div>
-      {results.map((message) => {
-        return <p>{message.content}</p>;
+      {results?.map((message) => {
+        return <p key={message._id}>{message.content}</p>;
       })}
     </div>
   );

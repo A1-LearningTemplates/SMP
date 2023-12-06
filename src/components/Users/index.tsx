@@ -13,7 +13,7 @@ const Users = () => {
   const toggleClassName = () => {
     setFadeIn((prev) => !prev);
   };
-  const { setUserMessenger } = useContext(UserContext);
+  const { setUserMessenger, userId } = useContext(UserContext);
   const navigate = useNavigate();
   const users = useQuery(api.users.gesUsers);
   const onUserClick = (user: UserInfo) => {
@@ -36,11 +36,15 @@ const Users = () => {
           </h3>
           {users?.map((user) => {
             return (
-              <UserAvatar
-                key={user._id}
-                onUserClick={onUserClick}
-                user={user}
-              />
+              <>
+                {user?._id !== userId && (
+                  <UserAvatar
+                    key={user._id}
+                    onUserClick={onUserClick}
+                    user={user}
+                  />
+                )}
+              </>
             );
           })}
         </div>

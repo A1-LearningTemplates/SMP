@@ -1,17 +1,16 @@
-import MessageForm from "./MessageForm";
 import { useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
-import UserAvatar, { UserInfo } from "../Users/UserAvatar";
-import { useContext, useState } from "react";
-import Messages from "./Messages";
+import { UserInfo } from "../Users/UserAvatar";
+import { lazy, useContext, useState } from "react";
 import { Id } from "../../../convex/_generated/dataModel";
 import { UserContext } from "../../context";
+import MessengerUser from "./MessengerUser";
+const MessengerChat = lazy(() => import("./MessengerChat"));
 
 const Messenger = () => {
   const [show, setShow] = useState(false);
   const users = useQuery(api.users.gesUsers);
   const { userId, setUserMessenger, userMessenger } = useContext(UserContext);
-  const [activeUser, setActiveUser] = useState<UserInfo | null>(null);
   const onUserClick = (user: UserInfo) => {
     setUserMessenger(user);
     togglePage();
@@ -27,38 +26,20 @@ const Messenger = () => {
         </div>
 
         <div className="absolute w-full top-[20%] left-0 bottom-0 right-0 mx-auto shadow md:w-[85%] h-2/3 bg-slate-100 rounded grid md:grid-cols-[200px,100%] overflow-hidden">
-          <div
-            className={`flex-col md:items-start p-2 h-full md:flex  gap-2 w-full md:w-48 bg-slate-50 ${
-              show ? "hidden" : "flex"
-            } `}
-          >
-            <h2 className="text-2xl font-bold self-center">Online</h2>
-            <div className="flex flex-wrap gap-2">
-              {users?.map((user) => (
-                <UserAvatar user={user} onUserClick={onUserClick} />
-              ))}
-            </div>
-          </div>
-          <div
-            className={`${
-              !show ? "hidden" : "grid"
-            }  grid-rows-[40px,1fr,60px] md:grid`}
-          >
-            <div className="text-center bg-slate-50 my-auto ">
-              <h3 className="text-xl font-bold py-2">
-                Chat with <small>{userMessenger?.nickname}</small>
-              </h3>
-            </div>
-
-            <Messages
-              receiverId={userMessenger?._id as Id<"users">}
-              senderId={userId as Id<"users">}
+          <MessengerUser
+            users={users as UserInfo[]}
+            userId={userId as Id<"users">}
+            onUserClick={onUserClick}
+            show={show}
+          />
+          {userMessenger && (
+            <MessengerChat
+              show={show}
+              nickname={userMessenger?.nickname}
+              receiverId={userMessenger?._id}
+              senderId={userId}
             />
-            <MessageForm
-              receiverId={userMessenger?._id as Id<"users">}
-              senderId={userId as Id<"users">}
-            />
-          </div>
+          )}
         </div>
       </div>
     </div>

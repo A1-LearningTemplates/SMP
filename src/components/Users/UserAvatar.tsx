@@ -15,19 +15,19 @@ const UserAvatar = ({ user, onUserClick }: UserAvatarProps) => {
   return (
     <div
       key={user?._id}
-      className="relative flex justify-center items-center cursor-pointer gap-2 p-2"
+      className="relative flex justify-center items-center cursor-pointer gap-2 py-2"
       onClick={() => onUserClick(user)}
     >
       <div className="relative flex justify-center items-center gap-2">
         <img
-          className="w-8 h-8 rounded-full"
+          className="w-6 h-6 rounded-full"
           src={user?.picture}
           alt={user?.nickname}
         />
         <ActiveUser is_active={user?.is_active} />
       </div>
 
-      <p className="font-bold">{user?.nickname}</p>
+      <p className="text-xl">{user?.nickname}</p>
     </div>
   );
 };

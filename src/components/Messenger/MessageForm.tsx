@@ -5,11 +5,16 @@ type FormInitialValues = {
 };
 import { useMutation } from "convex/react";
 import { api } from "../../../convex/_generated/api";
-import { useAppSelector } from "../../features/hooks";
+
 import { Id } from "../../../convex/_generated/dataModel";
 
-const MessageForm = ({ receiverId }: { receiverId: Id<"users"> }) => {
-  const senderId = useAppSelector((state) => state.user.userId);
+const MessageForm = ({
+  receiverId,
+  senderId,
+}: {
+  receiverId: Id<"users">;
+  senderId: Id<"users">;
+}) => {
   const createMessage = useMutation(api.messages.createMessage);
   const initialValues = {
     content: "",

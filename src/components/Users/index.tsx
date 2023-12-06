@@ -1,21 +1,24 @@
 import { useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 import ShowButton from "./ShowButton";
 import { useNavigate } from "react-router-dom";
-import UserAvatar from "./UserAvatar";
+import UserAvatar, { UserInfo } from "./UserAvatar";
+import { UserContext } from "../../context";
 
 const Users = () => {
   const [fadeIn, setFadeIn] = useState(false);
   const toggleClassName = () => {
     setFadeIn((prev) => !prev);
   };
+  const { setUserMessenger } = useContext(UserContext);
   const navigate = useNavigate();
   const users = useQuery(api.users.gesUsers);
-  const onUserClick = () => {
+  const onUserClick = (user: UserInfo) => {
     navigate("/messenger");
+    setUserMessenger(user);
   };
   if (!users) return <p>Loading Users ..</p>;
   return (

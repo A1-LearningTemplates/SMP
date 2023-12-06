@@ -1,15 +1,24 @@
+import { usePaginatedQuery } from "convex/react";
+import { api } from "../../../convex/_generated/api";
+import { Id } from "../../../convex/_generated/dataModel";
 
-const Messages = () => {
+const Messages = ({
+  receiverId,
+  senderId,
+}: {
+  receiverId: Id<"users">;
+  senderId: Id<"users">;
+}) => {
+  const { results, status, loadMore } = usePaginatedQuery(
+    api.messages.getMessages,
+    { receiverId, senderId },
+    { initialNumItems: 20 }
+  );
   return (
     <div>
-      <p>hello</p>
-      <p>hello</p>
-      <p>hello</p>
-      <p>hello</p>
-      <p>hello</p>
-      <p>hello</p>
-      <p>hello</p>
-      <p>hello</p>
+      {results.map((message) => {
+        return <p>{message.content}</p>;
+      })}
     </div>
   );
 };

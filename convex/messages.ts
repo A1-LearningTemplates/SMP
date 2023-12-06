@@ -23,15 +23,17 @@ export const getMessages = query({
           )
         )
       )
-      .order("desc")
+      .order("asc")
       .paginate(args.paginationOpts);
     messages.page = await Promise.all(
       messages.page.map(async (message) => {
-        // const user = await ctx.db.get(message.senderId);
         const receiver = await ctx.db.get(message.receiverId);
-        // const mediaUrl = message?.media && (await ctx.storage.getUrl(message?.media));
-        // message.media = mediaUrl || undefined;
-        return { ...message, receiver: receiver || undefined };
+        const sender = await ctx.db.get(message.senderId);
+        return {
+          ...message,
+          receiver: receiver || undefined,
+          sender: sender || undefined,
+        };
       })
     );
 

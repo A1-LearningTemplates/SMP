@@ -7,11 +7,12 @@ type FormInitialValues = {
 };
 import { useMutation } from "convex/react";
 import { api } from "../../../convex/_generated/api";
-import { useAppSelector } from "../../features/hooks";
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import Spinner from "./Spinner";
+import { UserContext } from "../../context";
+import { Id } from "../../../convex/_generated/dataModel";
 const AddPost = () => {
-  const userId = useAppSelector((state) => state.user.userId);
+  const { userId } = useContext(UserContext);
   const [isLoading, setIsLoading] = useState(false);
   const inputFileRef = useRef<HTMLInputElement>(null);
   const [files, setFiles] = useState<FileList | null>(null);
@@ -54,7 +55,7 @@ const AddPost = () => {
       const postData = {
         ...values,
         media,
-        userId,
+        userId: userId as Id<"users">,
       };
       createPost(postData);
       actions.resetForm();

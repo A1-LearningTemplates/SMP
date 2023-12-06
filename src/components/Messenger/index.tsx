@@ -2,16 +2,18 @@ import MessageForm from "./MessageForm";
 import { useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import UserAvatar, { UserInfo } from "../Users/UserAvatar";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Messages from "./Messages";
 import { Id } from "../../../convex/_generated/dataModel";
+import { UserContext } from "../../context";
 
 const Messenger = () => {
   const [show, setShow] = useState(false);
   const users = useQuery(api.users.gesUsers);
+  const { userId, setUserMessenger, userMessenger } = useContext(UserContext);
   const [activeUser, setActiveUser] = useState<UserInfo | null>(null);
   const onUserClick = (user: UserInfo) => {
-    setActiveUser(user);
+    setUserMessenger(user);
     togglePage();
   };
   const togglePage = () => {
@@ -44,12 +46,18 @@ const Messenger = () => {
           >
             <div className="text-center bg-slate-50 my-auto ">
               <h3 className="text-xl font-bold py-2">
-                Chat with <small>{activeUser?.nickname}</small>
+                Chat with <small>{userMessenger?.nickname}</small>
               </h3>
             </div>
 
-            <Messages />
-            <MessageForm receiverId={activeUser?._id as Id<"users">} />
+            <Messages
+              receiverId={userMessenger?._id as Id<"users">}
+              senderId={userId as Id<"users">}
+            />
+            <MessageForm
+              receiverId={userMessenger?._id as Id<"users">}
+              senderId={userId as Id<"users">}
+            />
           </div>
         </div>
       </div>

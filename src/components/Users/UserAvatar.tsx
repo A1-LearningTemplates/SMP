@@ -20,7 +20,7 @@ const UserAvatar = ({ user, onUserClick }: UserAvatarProps) => {
     >
       <div className="relative flex justify-center items-center gap-2">
         <img
-          className="w-6 h-6 rounded-full"
+          className="w-8 h-8 rounded-full"
           src={user?.picture}
           alt={user?.nickname}
         />

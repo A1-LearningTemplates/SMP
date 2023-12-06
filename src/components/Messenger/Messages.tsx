@@ -3,7 +3,6 @@ import { api } from "../../../convex/_generated/api";
 import { Id } from "../../../convex/_generated/dataModel";
 import { UserContext } from "../../context";
 import { useContext, useEffect, useRef } from "react";
-import ActiveUser from "../Users/ActiveUser";
 
 const Messages = ({
   receiverId,
@@ -48,14 +47,11 @@ const Messages = ({
                   </span>
                 </div>
               </div>
-              <div className="relative flex justify-center items-center gap-2">
-                <img
-                  src={message.sender?.picture}
-                  alt="My profile"
-                  className="w-6 h-6 rounded-full order-1"
-                />
-                <ActiveUser is_active={message.sender?.is_active} />
-              </div>
+              <img
+                src={message.sender?.picture}
+                alt="My profile"
+                className="w-6 h-6 rounded-full order-1"
+              />
             </div>
           </div>
         );

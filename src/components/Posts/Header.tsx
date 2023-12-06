@@ -18,7 +18,7 @@ const Header = ({ imgSrc, userName, date, is_active }: HeaderProps) => {
             imgSrc ||
             "https://static.vecteezy.com/system/resources/previews/019/896/008/original/male-user-avatar-icon-in-flat-design-style-person-signs-illustration-png.png"
           }
-          alt=""
+          alt={userName}
         />
         <ActiveUser is_active={is_active} />
         <p className="font-bold">{userName}</p>

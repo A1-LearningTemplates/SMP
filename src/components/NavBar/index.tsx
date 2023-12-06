@@ -53,7 +53,11 @@ const NavBar = () => {
         <div className="flex justify-between items-center md:w-[50%] lg:w-[32%]">
           <Authenticated>
             <div className="hidden md:flex items-center">
-              <img src={user?.picture} className="rounded-full h-10 mx-3" />
+              <img
+                src={user?.picture}
+                className="rounded-full h-10 mx-3"
+                alt={user?.nickname}
+              />
               <p className="flex flex-wrap gap-2 text-gray-300">
                 <span>Hello,</span>
                 <span>{user?.nickname}</span>

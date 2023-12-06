@@ -1,4 +1,3 @@
-
 import { Id } from "../../../convex/_generated/dataModel";
 
 import ActiveUser from "./ActiveUser";
@@ -13,19 +12,17 @@ type UserAvatarProps = {
   user: UserInfo;
 };
 const UserAvatar = ({ user, onUserClick }: UserAvatarProps) => {
-
   return (
     <div
       key={user?._id}
       className="relative flex justify-center items-center cursor-pointer gap-2 p-2"
       onClick={() => onUserClick(user)}
-   
     >
       <div className="relative flex justify-center items-center gap-2">
         <img
-          className="w-10 h-10 rounded-full"
+          className="w-8 h-8 rounded-full"
           src={user?.picture}
-          alt="User Image"
+          alt={user?.nickname}
         />
         <ActiveUser is_active={user?.is_active} />
       </div>

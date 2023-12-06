@@ -10,8 +10,7 @@ const Header = () => {
         <img
           className="shadow w-full"
           src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8M3x8fGVufDB8fHx8fA%3D%3D"
-          alt=""
-          srcSet=""
+          alt="trees"
         />
       </div>
       <div className="flex flex-col gap-4 justify-center text-center h-2/3 w-full flex-1 px-6 md:justify-between md:px-0 md:gap-0 md:text-start">

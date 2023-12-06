@@ -11,7 +11,7 @@ const Post = ({ media, body, title }: PostProps) => {
         <p>{body}</p>
       </div>
       <div className="w-full overflow-hidden ">
-        <img className="rounded  m-auto" src={media} alt="" />
+        <img className="rounded  m-auto" src={media} alt={title} />
       </div>
     </div>
   );

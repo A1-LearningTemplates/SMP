@@ -13,13 +13,13 @@ const MessengerChat = memo(
   ({ show, nickname, receiverId, senderId }: PropsMessengerChat) => {
     return (
       <div
-        className={`${
-          !show ? "hidden" : "grid"
-        }  grid-rows-[40px,1fr,60px] md:grid`}
+        className={`relative ${
+          !show ? "hidden" : "flex"
+        } md:flex flex-col gap-2 overflow-hidden h-full `}
       >
-        <div className="text-center bg-slate-50 my-auto ">
+        <div className=" text-end px-4 bg-slate-50 h-60px md:text-center">
           <h3 className="text-xl font-bold py-2">
-            Chat with <small>{nickname}</small>
+            Chat with: <small>{nickname}</small>
           </h3>
         </div>
 
@@ -28,7 +28,7 @@ const MessengerChat = memo(
           senderId={senderId as Id<"users">}
         />
         <MessageForm
-          receiverId={senderId as Id<"users">}
+          receiverId={receiverId as Id<"users">}
           senderId={senderId as Id<"users">}
         />
       </div>

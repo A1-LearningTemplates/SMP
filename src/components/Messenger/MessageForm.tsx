@@ -1,4 +1,4 @@
-import { Formik, FormikHelpers, Form, Field, ErrorMessage } from "formik";
+import { Formik, FormikHelpers, Form, Field } from "formik";
 type FormInitialValues = {
   content: string;
   // media: string;
@@ -45,22 +45,17 @@ const MessageForm = ({
     }
   };
 
-  const renderError = (message: string) => (
-    <span className="h-full bg-red-400 px-8 py-1 rounded">{message}</span>
-  );
-
   return (
-    <div className="w-full py-3">
+    <div className="absolute bottom-0 w-full ">
       <Formik initialValues={initialValues} onSubmit={onMessageSend}>
-        <Form className="flex flex-col gap-3">
-          <div>
+        <Form className="h-full">
+          <div className="h-full">
             <Field
-              className="input "
+              className="input h-full"
               name="content"
               type="text"
               placeholder="Message..."
             />
-            <ErrorMessage name="content" render={renderError} />
           </div>
         </Form>
       </Formik>

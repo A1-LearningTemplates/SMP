@@ -12,7 +12,7 @@ const Messages = ({
   senderId: Id<"users">;
 }) => {
   const { userId } = useContext(UserContext);
-  const { results, status, loadMore } = usePaginatedQuery(
+  const { results /* status, loadMore  */ } = usePaginatedQuery(
     api.messages.getMessages,
     { receiverId, senderId },
     { initialNumItems: 1000 }

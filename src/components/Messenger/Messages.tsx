@@ -54,7 +54,7 @@ const Messages = ({
                   alt="My profile"
                   className="w-6 h-6 rounded-full order-1"
                 />
-                <ActiveUser is_active={message.receiver?.is_active} />
+                <ActiveUser is_active={message.sender?.is_active} />
               </div>
             </div>
           </div>

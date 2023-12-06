@@ -26,7 +26,7 @@ const Posts = memo(() => {
           </div>
         );
       })}
-      <button onClick={() => loadMore(5)} disabled={status !== "CanLoadMore"}>
+      <button onClick={(e) => loadMore(5)} disabled={status !== "CanLoadMore"}>
         Load More
       </button>
     </div>

@@ -4,25 +4,25 @@ import { MdLogout, MdLogin } from "react-icons/md";
 import logo from "../../assets/SMP.png";
 import { useMutation } from "convex/react";
 import { api } from "../../../convex/_generated/api";
-import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../../features/hooks";
-import { removeUserId, setUserId } from "../../features/users/userSlice";
+import { useEffect, useContext } from "react";
+
+import { UserContext } from "../../context";
+import { Id } from "../../../convex/_generated/dataModel";
 
 const NavBar = () => {
-  const dispatch = useAppDispatch();
-  const userId = useAppSelector((state) => state.user.userId);
+  const { userId, removeUserId, setUserId } = useContext(UserContext);
   const authenticate = useMutation(api.users.authenticate);
   const updateVisibility = useMutation(api.users.updateVisibility);
   const { user, logout, loginWithRedirect, isAuthenticated } = useAuth0();
-  const handelLogin = async () => { 
+  const handelLogin = async () => {
     await loginWithRedirect();
   };
   const handelLogout = async () => {
-    dispatch(removeUserId());
     await logout({
       logoutParams: { returnTo: window.location.origin },
     });
-    await updateVisibility({ id: userId });
+    await updateVisibility({ id: userId as Id<"users"> });
+    removeUserId();
   };
   useEffect(() => {
     const handleAuth = async (user: User | undefined) => {
@@ -33,7 +33,7 @@ const NavBar = () => {
           nickname: user?.nickname || "",
         });
 
-        dispatch(setUserId(userId));
+        setUserId(userId);
       } catch (error) {
         console.log(error);
       }

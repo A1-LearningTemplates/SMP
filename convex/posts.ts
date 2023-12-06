@@ -17,7 +17,6 @@ export const getPosts = query({
         return { ...post, user: user || undefined };
       })
     );
-
     return posts;
   },
 });

@@ -1,6 +1,7 @@
 import { Navigate, RouteObject, createBrowserRouter } from "react-router-dom";
 
 import { Suspense, lazy } from "react";
+import NavBar from "../components/NavBar";
 // import Home from "../components/Home";
 // import Messenger from "../components/Messenger";
 const Home = lazy(() => import("../components/Home"));
@@ -15,6 +16,7 @@ const initRouter: RouteObject[] = [
     path: "/home",
     element: (
       <Suspense fallback={<p>Loading ...</p>}>
+        <NavBar />
         <Home />
       </Suspense>
     ),
@@ -23,6 +25,7 @@ const initRouter: RouteObject[] = [
     path: "/messenger",
     element: (
       <Suspense fallback={<p>Loading ...</p>}>
+        <NavBar />
         <Messenger />
       </Suspense>
     ),

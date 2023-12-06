@@ -9,7 +9,6 @@ import { Authenticated, Unauthenticated } from "convex/react";
 function App() {
   return (
     <div className="px-1 lg:px-20 xl:px-24 bg-slate-200 h-full">
-      <NavBar />
       <Unauthenticated>
         <RouterProvider router={unAuthRouter} />
       </Unauthenticated>

@@ -8,6 +8,7 @@ import { useEffect, useContext, useMemo } from "react";
 
 import { UserContext } from "../../context";
 import { Id } from "../../../convex/_generated/dataModel";
+import { useNavigate } from "react-router-dom";
 
 const NavBar = () => {
   const { userId, removeUserId, setUserId } = useContext(UserContext);
@@ -41,13 +42,18 @@ const NavBar = () => {
     };
     if (isAuthenticated) {
       handleAuth(user);
+    } else {
+      navigate("/");
     }
   }, [isAuthenticated]);
-
+  const navigate = useNavigate();
   return (
     <header className="fixed top-0 left-0 bg-gradient-to-b from-slate-900 to-slate-400 h-16 shadow z-10">
       <nav className="w-screen px-2 flex justify-between items-center h-full md:px-24">
-        <div className="w-28">
+        <div
+          className="w-28 cursor-pointer"
+          onClick={() => navigate(isAuthenticated ? "/home" : "/")}
+        >
           <img src={logo} alt="logo" />
         </div>
         <div className="flex justify-between items-center md:w-[50%] lg:w-[32%]">

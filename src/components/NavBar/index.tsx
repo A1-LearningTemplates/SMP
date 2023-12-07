@@ -36,6 +36,7 @@ const NavBar = () => {
         });
 
         setUserId(userId);
+        navigate("/home");
       } catch (error) {
         console.log(error);
       }

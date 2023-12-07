@@ -21,3 +21,9 @@ function App() {
 }
 
 export default App;
+/* 
+not found page
+fix router
+fix chat forme and user active on messages
+write documentation take screen shot and post them on linked in
+*/

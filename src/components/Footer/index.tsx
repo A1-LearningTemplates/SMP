@@ -28,9 +28,9 @@ const Footer = () => {
       <section className="flex-1 h-full flex flex-col gap-4 justify-center mt-5 text-center md:gap-16 md:text-start">
         <h3 className="text-2xl font-bold">About the company</h3>
         <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odio rem
-          veritatis possimus neque blanditiis vero repudiandae optio porro
-          obcaecati odit.
+          SMP isn't just a social media platform; it's a testament to the
+          synergy of advanced technologies. SMP is not just an app; it's a
+          technological journey into the future of social networking.
         </p>
         <div className="flex justify-around w-full md:justify-start md:gap-16">
           {socialList.map(({ icon }, index) => {

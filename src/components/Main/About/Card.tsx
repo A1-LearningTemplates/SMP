@@ -5,9 +5,9 @@ interface CardProps {
 }
 const Card = ({ src, title, content }: CardProps) => {
   return (
-    <div className="flex flex-col gap-2 border m-2 shadow rounded">
+    <div className="flex flex-col gap-2 border m-2 shadow rounded flex-1 overflow-hidden">
       <div className="">
-        <img className="w-full" src={src} alt={title} />
+        <img className="w-full h-60" src={src} alt={title} />
       </div>
 
       <div className="p-2">

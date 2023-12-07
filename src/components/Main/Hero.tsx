@@ -16,20 +16,29 @@ const Header = () => {
       <div className="flex flex-col gap-4 justify-center text-center h-2/3 w-full flex-1 px-6 md:justify-between md:px-0 md:gap-0 md:text-start">
         <div>
           <h2 className="text-2xl font-bold border-b-2 border-b-slate-300 text-center pb-2">
-            Orem amet consectetur adipisicing elit. Voluptas
+            Introduction to Our Innovative Social Media Platform - SMP
           </h2>
         </div>
-        <p className="md:mb-10 text-ellipsis md:overflow-hidden">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas
-          ipsum aliquam dignissimos illum maiores, odio laboriosam vel dolorum
-          possimus animi, tenetur ea nesciunt aut iste aspernatur quis atque
-          impedit natus. Lorem ipsum dolor sit amet consectetur adipisicing
-          elit. Voluptas ipsum aliquam dignissimos illum maiores, odio
-          laboriosam vel dolorum possimus animi, tenetur ea nesciunt aut iste
-          aspernatur quis atque impedit natus. Lorem ipsum dolor sit amet
-          consectetur adipisicing elit. Voluptas ipsum aliquam dignissimos illum
-          maiores, odio laboriosam vel dolorum possimus animi, tenetur ea
-          nesciunt aut iste aspernatur quis atque impedit natus.
+        <p className="flex flex-col gap-2 md:mb-10 md:overflow-hidden">
+          <span>
+            Welcome to our cutting-edge social media platform, a dynamic web
+            application crafted to provide a good user experience. Our platform
+            boasts a front-end built with React and Vite, offering a
+            lightning-fast and responsive interface that keeps pace with the
+            demands of today's users.
+          </span>
+          <span>
+            Fueling the core of SMP is the Convex framework, a backend that
+            enables scalability, efficiency, and security. Convex allows us to
+            manage data seamlessly, process requests efficiently, and maintain
+            the robustness of our application.
+          </span>
+          <span>
+            In the realm of authentication and security, SMP turns to Auth0.
+            With Auth0 integration, we implement a world-class authentication
+            system that safeguards user information while providing a seamless
+            login experience.
+          </span>
         </p>
 
         <button

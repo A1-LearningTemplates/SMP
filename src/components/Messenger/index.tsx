@@ -8,9 +8,9 @@ import MessengerUser from "./MessengerUser";
 const MessengerChat = lazy(() => import("./MessengerChat"));
 
 const Messenger = () => {
-  const [show, setShow] = useState(false);
-  const users = useQuery(api.users.gesUsers);
   const { userId, setUserMessenger, userMessenger } = useContext(UserContext);
+  const [show, setShow] = useState(userId ? true : false);
+  const users = useQuery(api.users.gesUsers);
   const onUserClick = (user: UserInfo) => {
     setUserMessenger(user);
     togglePage();

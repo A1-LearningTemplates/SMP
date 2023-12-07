@@ -4,26 +4,26 @@ const cardsData = [
   {
     id: 1,
     src:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThDK8d9Iq_5Lw0wXMMBMXxjKQQeT3z9SVppnKwjN0pxpiU6tXMcYEPeSr-KAVc0MgXuE0&usqp=CAU",
-    title: "Title One",
+      "https://files.ably.io/ghost/prod/2023/01/build-a-realtime-chat-app-from-scratch--1-.png",
+    title: "Real-time Capabilities",
     content:
-      "cumque maiores tempora culpa numquam sit doloremque eos? Sint, modi facere cum odio possimus laboriosam, excepturi quia iusto ea sequi eveniet?",
+      "SMP leverages real-time technologies, offering users instantaneous updates and interactions, creating a dynamic and engaging community.",
   },
   {
     id: 2,
     src:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLspqwPtuILnDvflxYrRW8Hyzs-FIONlchKX1k3AnHXArNUCGd0eXJhOJLU0D7sHcn8pE&usqp=CAU",
-    title: "Title Tow",
+      "https://www.pragmaticinstitute.com/resources/wp-content/uploads/sites/6/2022/03/54182154_m-scaled.jpg",
+    title: "Content Sharing Innovation",
     content:
-      "cumque maiores tempora culpa numquam sit doloremque eos? Sint, modi facere cum odio possimus laboriosam, excepturi quia iusto ea sequi eveniet?",
+      "SMP facilitates effortless sharing of multimedia content, keeping users connected and entertained.",
   },
   {
     id: 3,
     src:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFawUZJ_1mjbhsa2hHol5TDsjSfsfJx1NGqX7PyQVqdY_HjuD9AFUc3t7QUdgjoXj_EA4&usqp=CAU",
-    title: "Title Three",
+      "https://www.invensislearning.com/blog/wp-content/uploads/2020/10/Top-cybersecurity-threats-and-how-to-address-them-1068x552-1.jpg",
+    title: "Privacy Controls",
     content:
-      "cumque maiores tempora culpa numquam sit doloremque eos? Sint, modi facere cum odio possimus laboriosam, excepturi quia iusto ea sequi eveniet?",
+      "SMP empowers users with granular privacy settings, ensuring a safe and customized online environment.",
   },
 ];
 const About = () => {
@@ -35,7 +35,7 @@ const About = () => {
       <h2 className="text-2xl font-bold border-b-2 border-b-slate-300 lg:w-1/6 text-center pb-2">
         About
       </h2>
-      <div className="flex flex-col gap-2 lg:flex-row ">
+      <div className="flex flex-col gap-2 lg:flex-row  ">
         {cardsData.map((card) => {
           return (
             <Card

@@ -7,7 +7,12 @@ const Contact = () => {
       <h2 className="text-2xl font-bold border-b-2 border-b-slate-300 lg:w-1/6 text-center pb-2">
         Contact
       </h2>
-      <form className="flex flex-col w-full items-center p-3 gap-6 h-2/3 md:w-1/2">
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+        }}
+        className="flex flex-col w-full items-center p-3 gap-6 h-2/3 md:w-1/2"
+      >
         <div className="w-full">
           <input className="input" type="text" name="name" placeholder="Name" />
         </div>

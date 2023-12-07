@@ -20,7 +20,6 @@ const Users = () => {
     navigate("/messenger");
     setUserMessenger(user);
   };
-  if (!users) return <p>Loading Users ..</p>;
   return (
     <>
       <ShowButton fadeIn={fadeIn} toggleClassName={toggleClassName} />
@@ -34,19 +33,23 @@ const Users = () => {
           <h3 className="text-2xl self-center font-bold text-center pb-2 text-slate-900 border-b-2 border-slate-700 mb-4">
             online users
           </h3>
-          {users?.map((user) => {
-            return (
-              <>
-                {user?._id !== userId && (
-                  <UserAvatar
-                    key={user._id}
-                    onUserClick={onUserClick}
-                    user={user}
-                  />
-                )}
-              </>
-            );
-          })}
+          {users ? (
+            users.map((user) => {
+              return (
+                <>
+                  {user?._id !== userId && (
+                    <UserAvatar
+                      key={user._id}
+                      onUserClick={onUserClick}
+                      user={user}
+                    />
+                  )}
+                </>
+              );
+            })
+          ) : (
+            <p>Loading..</p>
+          )}
         </div>
       </div>
     </>

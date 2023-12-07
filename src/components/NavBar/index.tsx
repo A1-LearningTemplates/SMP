@@ -1,7 +1,6 @@
 import { Authenticated, Unauthenticated, AuthLoading } from "convex/react";
 import { User, useAuth0 } from "@auth0/auth0-react";
 import { MdLogout, MdLogin } from "react-icons/md";
-import logo from "../../assets/SMP.png";
 import { useMutation } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { useEffect, useContext } from "react";
@@ -44,7 +43,7 @@ const NavBar = () => {
         navigate("/");
       }
     };
-    if (user) {
+    if (user && !userId) {
       handleAuth(user);
     }
   }, [user]);
@@ -56,7 +55,7 @@ const NavBar = () => {
           className="w-28 cursor-pointer"
           onClick={() => navigate(isAuthenticated ? "/home" : "/")}
         >
-          <img src={logo} alt="logo" />
+          <img src="/SMP.png" alt="logo" />
         </div>
         <div className="flex justify-between items-center md:w-[50%] lg:w-[32%]">
           <Authenticated>

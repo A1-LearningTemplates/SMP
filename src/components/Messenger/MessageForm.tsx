@@ -25,8 +25,6 @@ const MessageForm = ({
     values: FormInitialValues,
     actions: FormikHelpers<FormInitialValues>
   ) => {
-    console.log(values);
-
     try {
       const message = {
         content: values.content,

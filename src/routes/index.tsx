@@ -1,10 +1,9 @@
 import { RouteObject, createBrowserRouter } from "react-router-dom";
-
 import { Suspense, lazy } from "react";
 import Root from "../components/Root";
 import Main from "../components/Main";
-// import Home from "../components/Home";
-// import Messenger from "../components/Messenger";
+import { AuthLoading, Authenticated, Unauthenticated } from "convex/react";
+import ErrorPage from "../components/ErrorPage";
 const Home = lazy(() => import("../components/Home"));
 const Messenger = lazy(() => import("../components/Messenger"));
 const initRouter: RouteObject[] = [
@@ -13,24 +12,52 @@ const initRouter: RouteObject[] = [
     element: <Root />,
     children: [
       {
-        path: "/home",
+        path: "",
+        element: (
+          <>
+            <Unauthenticated>
+              <Main />
+            </Unauthenticated>
+            <AuthLoading>
+              <p className="mt-20">Loading ...</p>
+            </AuthLoading>
+          </>
+        ),
+      },
+      {
+        index: true,
+        path: "home",
         element: (
           <Suspense fallback={<p>Loading ...</p>}>
-            <Home />
+            <AuthLoading>
+              <p className="mt-20">Loading ...</p>
+            </AuthLoading>
+            <Authenticated>
+              <Home />
+            </Authenticated>
           </Suspense>
         ),
       },
       {
-        path: "/messenger",
+        path: "messenger",
         element: (
           <Suspense fallback={<p>Loading ...</p>}>
-            <Messenger />
+            <AuthLoading>
+              <p className="mt-20">Loading ...</p>
+            </AuthLoading>
+            <Authenticated>
+              <Messenger />
+            </Authenticated>
           </Suspense>
         ),
       },
       {
-        path: "/",
-        element: <Main />,
+        path: "*",
+        element: (
+          <Suspense fallback={<p>Loading ...</p>}>
+            <ErrorPage />
+          </Suspense>
+        ),
       },
     ],
   },

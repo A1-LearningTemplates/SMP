@@ -4,7 +4,7 @@ import { MdLogout, MdLogin } from "react-icons/md";
 import logo from "../../assets/SMP.png";
 import { useMutation } from "convex/react";
 import { api } from "../../../convex/_generated/api";
-import { useEffect, useContext, useMemo } from "react";
+import { useEffect, useContext } from "react";
 
 import { UserContext } from "../../context";
 import { Id } from "../../../convex/_generated/dataModel";
@@ -15,17 +15,20 @@ const NavBar = () => {
   const authenticate = useMutation(api.users.authenticate);
   const updateVisibility = useMutation(api.users.updateVisibility);
   const { user, logout, loginWithRedirect, isAuthenticated } = useAuth0();
-  const memUserId = useMemo(() => userId, [user]);
-  const handelLogin = async () => {
-    await loginWithRedirect();
+
+  const navigate = useNavigate();
+  const handelLogin = () => {
+    loginWithRedirect();
   };
   const handelLogout = async () => {
     await logout({
       logoutParams: { returnTo: window.location.origin },
     });
-    await updateVisibility({ id: memUserId as Id<"users"> });
+    await updateVisibility({ id: userId as Id<"users"> });
     removeUserId();
+    navigate("/");
   };
+
   useEffect(() => {
     const handleAuth = async (user: User | undefined) => {
       try {
@@ -34,20 +37,18 @@ const NavBar = () => {
           picture: user?.picture || "",
           nickname: user?.nickname || "",
         });
-
         setUserId(userId);
         navigate("/home");
       } catch (error) {
         console.log(error);
+        navigate("/");
       }
     };
-    if (isAuthenticated) {
+    if (user) {
       handleAuth(user);
-    } else {
-      navigate("/");
     }
-  }, [isAuthenticated]);
-  const navigate = useNavigate();
+  }, [user]);
+
   return (
     <header className="fixed top-0 left-0 bg-gradient-to-b from-slate-900 to-slate-400 h-16 shadow z-10">
       <nav className="w-screen px-2 flex justify-between items-center h-full md:px-24">
@@ -77,7 +78,7 @@ const NavBar = () => {
           </Authenticated>
           <Unauthenticated>
             <span className="text-gray-300">Discover our world</span>
-            <button className="btn ml-2" onClick={handelLogin}>
+            <button className="btn" onClick={handelLogin}>
               <MdLogin />
             </button>
           </Unauthenticated>

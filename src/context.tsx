@@ -20,13 +20,17 @@ export const UserContext = createContext<ContextProps>({
 });
 
 const UserProvider = (props: { children: ReactNode }) => {
-  const [id, setId] = useState<UserId | null>(null);
+  const [id, setId] = useState<UserId | null>(
+    localStorage.getItem("userId") as Id<"users">
+  );
   const [userMessenger, setMessenger] = useState<UserInfo | null>(null);
   const setUserId = (payload: UserId) => {
     setId(payload);
+    localStorage.setItem("userId", payload as "string");
   };
   const removeUserId = () => {
     setId(null);
+    localStorage.removeItem("userId");
   };
   const setUserMessenger = (payload: UserInfo) => {
     setMessenger(payload);

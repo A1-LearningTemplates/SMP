@@ -1,22 +1,17 @@
-import { Outlet, useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, Outlet } from "react-router-dom";
 import NavBar from "../NavBar";
-import { useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useEffect } from "react";
 
 const Root = () => {
-  const location = useLocation();
-  const { isAuthenticated } = useAuth0();
   const navigate = useNavigate();
-
+  const { isAuthenticated, isLoading } = useAuth0();
   useEffect(() => {
-    console.log(isAuthenticated);
-
-    if (isAuthenticated && location.pathname === "/") {
-      navigate("/home");
-    } else {
+    if (!isAuthenticated && !isLoading) {
       navigate("/");
     }
-  }, [isAuthenticated]);
+  }, []);
+
   return (
     <>
       <NavBar />

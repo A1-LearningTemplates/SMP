@@ -1,8 +1,9 @@
+import { useAuth0 } from "@auth0/auth0-react";
 import { Link, useRouteError } from "react-router-dom";
 
 export default function ErrorPage() {
   const error: any = useRouteError();
-
+  const { isAuthenticated } = useAuth0();
   return (
     <>
       <div className="flex items-center justify-center h-screen">
@@ -22,7 +23,7 @@ export default function ErrorPage() {
             </p>
 
             <Link
-              to="/"
+              to={isAuthenticated ? "/home" : "/"}
               className="px-5 py-2 rounded-md text-blue-100 bg-blue-600 hover:bg-blue-700"
             >
               Go home

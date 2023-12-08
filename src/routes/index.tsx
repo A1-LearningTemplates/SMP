@@ -1,4 +1,4 @@
-import { RouteObject, createBrowserRouter } from "react-router-dom";
+import { Navigate, RouteObject, createBrowserRouter } from "react-router-dom";
 import { Suspense, lazy } from "react";
 import Root from "../components/Root";
 import Main from "../components/Main";
@@ -15,12 +15,15 @@ const initRouter: RouteObject[] = [
         path: "",
         element: (
           <>
-            <Unauthenticated>
-              <Main />
-            </Unauthenticated>
             <AuthLoading>
               <p className="mt-20">Loading ...</p>
             </AuthLoading>
+            <Unauthenticated>
+              <Main />
+            </Unauthenticated>
+            <Authenticated>
+              <Navigate to="home" />
+            </Authenticated>
           </>
         ),
       },

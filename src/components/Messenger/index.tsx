@@ -21,13 +21,13 @@ const Messenger = () => {
   return (
     <div className=" h-screen w-full  overflow-hidden ">
       <div className="relative h-full ">
-        <div className="absolute  z-10  md:hidden top-20 ">
+        <div className="absolute z-10  md:hidden top-20 ">
           <button className="btn px-1" onClick={togglePage}>
             back
           </button>
         </div>
 
-        <div className="relative pt-20 w-full shadow h-full bg-slate-100 rounded md:grid md:grid-cols-[200px,1fr]">
+        <div className="relative py-20 w-full shadow h-full rounded md:grid md:grid-cols-[200px,1fr]">
           <MessengerUser
             users={users as UserInfo[]}
             userId={userId as Id<"users">}

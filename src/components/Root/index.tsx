@@ -6,14 +6,14 @@ import { useEffect } from "react";
 const Root = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { isAuthenticated, isLoading } = useAuth0();
+  const { user } = useAuth0();
   useEffect(() => {
-    if (!isAuthenticated && !isLoading) {
+    if (!user) {
       navigate("/");
     } else {
       navigate(location.pathname);
     }
-  }, [isAuthenticated, isLoading]);
+  }, [user]);
 
   return (
     <>

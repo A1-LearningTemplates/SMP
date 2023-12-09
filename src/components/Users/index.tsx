@@ -1,7 +1,7 @@
 import { useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 
-import { useContext, useState } from "react";
+import { memo, useContext, useState } from "react";
 
 import ShowButton from "./ShowButton";
 import { useNavigate } from "react-router-dom";
@@ -55,5 +55,4 @@ const Users = () => {
     </>
   );
 };
-
 export default Users;

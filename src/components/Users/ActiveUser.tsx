@@ -1,4 +1,6 @@
-const ActiveUser = ({ is_active }: { is_active: boolean | undefined }) => {
+import { memo } from "react";
+
+const ActiveUser = memo(({ is_active }: { is_active: boolean | undefined }) => {
   return (
     <>
       {!is_active ? (
@@ -11,6 +13,6 @@ const ActiveUser = ({ is_active }: { is_active: boolean | undefined }) => {
       )}
     </>
   );
-};
+});
 
 export default ActiveUser;

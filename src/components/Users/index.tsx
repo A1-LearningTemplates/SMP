@@ -1,7 +1,7 @@
 import { useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 
-import { memo, useContext, useState } from "react";
+import { useContext, useState } from "react";
 
 import ShowButton from "./ShowButton";
 import { useNavigate } from "react-router-dom";
@@ -20,6 +20,7 @@ const Users = () => {
     navigate("/messenger");
     setUserMessenger(user);
   };
+
   return (
     <>
       <ShowButton fadeIn={fadeIn} toggleClassName={toggleClassName} />

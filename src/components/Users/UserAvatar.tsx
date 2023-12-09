@@ -1,4 +1,3 @@
-import { memo } from "react";
 import { Id } from "../../../convex/_generated/dataModel";
 
 import ActiveUser from "./ActiveUser";
@@ -12,7 +11,7 @@ type UserAvatarProps = {
   onUserClick: (user: UserInfo) => void;
   user: UserInfo;
 };
-const UserAvatar = memo(({ user, onUserClick }: UserAvatarProps) => {
+const UserAvatar = ({ user, onUserClick }: UserAvatarProps) => {
   return (
     <div
       key={user?._id}
@@ -31,6 +30,6 @@ const UserAvatar = memo(({ user, onUserClick }: UserAvatarProps) => {
       <p className="text-xl">{user?.nickname}</p>
     </div>
   );
-});
+};
 
 export default UserAvatar;
